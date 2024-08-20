@@ -1,0 +1,68 @@
+﻿@model Assig1.Models.Offence
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-dark bg-gradient bg-warning p-2 my-2 border rounded">
+    <h1>Details</h1>
+</div>
+
+<div>
+    <h4>Offence</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExpiationFee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ExpiationFee)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdultLevy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdultLevy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CorporateFee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CorporateFee)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalFee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalFee)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DemeritPoints)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DemeritPoints)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SectionCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SectionCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Section.SectionId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.OffenceCode">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
