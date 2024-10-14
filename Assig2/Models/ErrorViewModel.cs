@@ -1,4 +1,4 @@
-namespace Assig1.Models
+namespace Assig2.Models
 {
     public class ErrorViewModel
     {

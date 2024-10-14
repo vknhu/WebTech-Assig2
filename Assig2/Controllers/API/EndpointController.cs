@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Assig1.Data;
-using Assig1.Models;
+using Assig2.Data;
+using Assig2.Models;
 using System.ComponentModel;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Immutable;
@@ -14,7 +14,7 @@ using Microsoft.Identity.Client;
 using System.Numerics;
 
 
-namespace Assig1.Controllers.API
+namespace Assig2.Controllers.API
 {
     using Azure.Identity;
     using Microsoft.AspNetCore.Identity;

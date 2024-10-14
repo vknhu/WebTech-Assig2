@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Assig1.Models;
+namespace Assig2.Models;
 
 public partial class LocalServiceArea
 {

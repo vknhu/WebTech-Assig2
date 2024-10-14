@@ -1,8 +1,8 @@
-﻿using Assig1.Models;
+﻿using Assig2.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Assig1.Controllers
+namespace Assig2.Controllers
 {
     public class HomeController : Controller
     {

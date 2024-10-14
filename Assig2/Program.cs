@@ -1,4 +1,4 @@
-using Assig1;
+using Assig2;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Set DB Context
-builder.Services.AddDbContext<Assig1.Data.ExpiationsContext>(options =>
+builder.Services.AddDbContext<Assig2.Data.ExpiationsContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ExpiationsContext") ??
 throw new InvalidOperationException("Connection String for Expiations DB not found")));
 
@@ -40,6 +40,14 @@ app.UseStaticFiles();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseRouting();
+
+app.UseCors(b =>
+{
+    b.AllowAnyMethod();
+    b.AllowAnyOrigin();
+    b.AllowAnyHeader();
+});
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

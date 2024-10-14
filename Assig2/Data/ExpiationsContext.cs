@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assig1.Models;
+using Assig2.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Assig1.Data;
+namespace Assig2.Data;
 
 public partial class ExpiationsContext : DbContext
 {
