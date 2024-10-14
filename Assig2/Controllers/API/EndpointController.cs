@@ -24,12 +24,6 @@ namespace Assig1.Controllers.API
     using System.Security.Policy;
     using System.Text;
 
-    /* 
-* If you would like to create D3 graphs from the data use this controller.
-* All actions in this controller must be requested using "/api/Graphs/[actionName]"
-* Pass parameters into your actions via queryStrings
-*/
-
 
     [Route("api/[action]")]
     [ApiController]
@@ -51,7 +45,7 @@ namespace Assig1.Controllers.API
         /// <param name="passwordHash"> The SHA256'd password </param>
         /// <returns>A bool confirming whether the information provided was correct.</returns>
         // GET: /api/Login
-        [HttpPost(Name = "Login")]
+        [HttpPost(Name = "Login"), HttpGet(Name = "Login")]
         public async Task<object> Login(string userName, string passwordHash)
         {
             if (!loginList.ContainsKey(userName)) return false;
@@ -66,7 +60,7 @@ namespace Assig1.Controllers.API
         /// <param name="passwordHash"> The SHA256'd password </param>
         /// <returns>A bool confirming whether the registration information was valid</returns>
         // POST: /api/Register
-        [HttpPost(Name = "Register")]
+        [HttpPost(Name = "Register"), HttpGet(Name = "Register")]
         public async Task<object> Register(string userName, string passwordHash)
         {
             if (loginList.ContainsKey(userName)) return false;
@@ -144,9 +138,10 @@ namespace Assig1.Controllers.API
         /// <param name="endTime">Optional: Return only Offences that happened before this end time. Uses Unix timestamp notation. Defaults to Int32.Max (All Offences)</param>
         /// <param name="offenceCodes">Optional: Return only Offences that include the current offenceCode. Multiple inputs allowed to extend the List. E.g. ["A001","A002"] </param>
         /// <returns>List&lt;Expiation&gt;. i.e a List of matching Expiation. Check the relationial diagram on the course website to help determine what fields are contained in the table.</returns>
-        [HttpPost(Name = "Get_ExpiationsForLocationId")]
-        public async Task<object> Get_ExpiationsForLocationId(int locationId, string? cameraTypeCode, int startTime=0, int endTime= Int32.MaxValue, List<String>? offenceCodes = null)
+        [HttpPost(Name = "Get_ExpiationsForLocationId"), HttpGet(Name = "Get_ExpiationsForLocationId")]
+        public async Task<object> Get_ExpiationsForLocationId(int locationId, string? cameraTypeCode, int startTime=0, int endTime= Int32.MaxValue, [FromQuery] List<String>?offenceCodes = null)
         {
+            
             Debug.Assert(cameraTypeCode == null || cameraCodes.Contains(cameraTypeCode), "Your provided cameraTypeCode wasn't in the list");
             Debug.Assert(locationId > 0, "locationId was 0 or null. You must supply valid locationId or things will explode (this is bad). Try fetching from Get_ListCamerasInSuburb");
             var dateRangeStart = DateOnlyRange_IHateTimezones(startTime, -1);
@@ -202,8 +197,8 @@ namespace Assig1.Controllers.API
         /// <param name="endTime">Optional: Return only Offences that happened before this end time. Uses Unix timestamp notation. Defaults to Int32.Max (All Offences)</param>
         /// <param name="offenceCodes">Optional: Return only Offences that include the current offenceCode. Multiple inputs allowed to extend the List: ["A001","A002"] </param>
         /// <returns>firstExpiationInSet, lastExpiationInSet, totalOffencesCount, totalDemerits, totalFeeSum, avgDemeritsPerDay, avgFeePerDay, expiationDaysOfWeek</returns>
-        [HttpPost(Name ="Get_ExpiationStatsForLocationId")]
-        public async Task<object> Get_ExpiationStatsForLocationId(int locationId, string? cameraTypeCode, int startTime = 0, int endTime = Int32.MaxValue, List<String>? offenceCodes = null)
+        [HttpPost(Name = "Get_ExpiationStatsForLocationId"), HttpGet(Name ="Get_ExpiationStatsForLocationId")]
+        public async Task<object> Get_ExpiationStatsForLocationId(int locationId, string? cameraTypeCode, int startTime = 0, int endTime = Int32.MaxValue, [FromQuery] List<String>? offenceCodes = null)
         {
             Debug.Assert(cameraTypeCode == null || cameraCodes.Contains(cameraTypeCode), "Your provided cameraTypeCode wasn't in the list");
             Debug.Assert(locationId > 0, "locationId was 0 or null. You must supply valid locationId or things will explode (this is bad). Try Get_ListCamerasInSuburb");
