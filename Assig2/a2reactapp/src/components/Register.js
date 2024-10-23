@@ -32,23 +32,20 @@ function Register() {
 
     return (
         <div className="register">
-            <h3>Register</h3>
-            <form className="registerForm" onSubmit={onSubmit}>
+            <h3>Create a new account</h3>
+            <form className="registerForm" method="get" onSubmit={onSubmit}>
                 <div className="inputGroup">
                     <label htmlFor="userName">Username:</label>
                     <input type="text" id="userName" name="userName" className="form-control" placeholder="Enter your username"
                         value={username} onChange={(e) => setUsername(e.target.value)} required />
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="Password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your Password"
                         value={password} onChange={(e) => setPassword(e.target.value)} required />
                     <button type="submit" className="btn btn-primary">Register</button>
                 </div>
             </form>
-            <div className="register">
-                <p className="inline-text">Already have an account? </p>
-                <Link to="/Login" className="btn btn-success login-link">Login</Link>
-            </div>
-            {registerStatus && <div className="alert alert-info">{registerStatus}</div>}
+            <p className="mt-3">Already have an Account?</p>
+            <Link to="/Login" className="btn btn-success">Login</Link>
         </div>
     );
 }
