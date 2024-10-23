@@ -20,42 +20,33 @@ function Login() {
                 console.log(err);
                 setLoginStatus('An error occurred while logging in');
             });
-
-        return (
-            <div className="login">
-                <h3>Sign in</h3>
-                <form className="loginForm">
-                    <div className="inputGroup">
-                        <label htmlFor="userName">Username:</label>
-                        <input
-                            type="text"
-                            id="userName"
-                            name="userName"
-                            autoComplete="off"
-                            placeholder="Enter your username"
-                        />
-                        <label htmlFor="Password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            autoComplete="off"
-                            placeholder="Enter your Password"
-                        />
-                        <button type="submit" class="btn btn-primary">
-                            Login
-                        </button>
-                    </div>
-                </form>
-                <div className="login">
-                    <p>Don't have Account? </p>
-                    <Link to="/" type="submit" class="btn btn-success">
-                        Register
-                    </Link>
-                </div>
-            </div>
-        );
     }
+    function onSubmit(e) {
+        e.preventDefault();
+        handleLogin();
+    }
+
+    return (
+        <div className="login">
+            <h3>Sign in</h3>
+            <form className="loginForm" method="get" onSubmit={onSubmit}>
+                <div className="inputGroup">
+                    <label htmlFor="userName">Username:</label>
+                    <input type="text" id="userName" name="userName" className="form-control" placeholder="Enter your username"
+                        value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                    <label htmlFor="Password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your Password"
+                        value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+            <div className="login">
+                <p>Don't have Account? </p>
+                <Link to="/" type="submit" class="btn btn-success">Register</Link>
+            </div>
+        </div>
+    );
+}
 }
 
 export default Login;
