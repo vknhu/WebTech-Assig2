@@ -43,8 +43,8 @@ function Login() {
                 </div>
             </form>
             <div className="login">
-                <p>Don't have Account? </p>
-                <Link to="/Register" type="submit" class="btn btn-success">Register</Link>
+                <p className="inline-text">Don't have Account? </p>
+                <Link to="/Register" type="submit" class="btn btn-success register-link">Register</Link>
             </div>
         </div>
     );

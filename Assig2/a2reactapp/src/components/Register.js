@@ -45,7 +45,7 @@ function Register() {
             </form>
             <div className="register">
                 <p className="inline-text">Already have an account? </p>
-                <Link to="/Login" className="btn btn-success register-link">Login</Link>
+                <Link to="/Login" className="btn btn-success login-link">Login</Link>
             </div>
             {registerStatus && <div className="alert alert-info">{registerStatus}</div>}
         </div>
