@@ -1,6 +1,7 @@
 ﻿import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
 import SHA256 from 'crypto-js/sha256';
+import { Link } from "react-router-dom";
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -47,7 +48,6 @@ function Login() {
             </div>
         </div>
     );
-}
 }
 
 export default Login;
