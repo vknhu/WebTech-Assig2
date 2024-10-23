@@ -1,5 +1,5 @@
 ﻿.login {
-    background-color: darkcyan;
+    background-color: darkcyan !important; /* Adding !important to ensure the background color applies */
     width: 25%;
     margin: 50px auto;
     padding: 40px;
@@ -28,19 +28,14 @@
     margin-top: 10px;
 }
 
-.login {
-    margin-top: 30px;
-    text-align: center;
+.login .btn.btn-success {
+    width: 50%;
 }
 
-    .login .btn.btn-success {
-        width: 50%;
-    }
-
-    .login h3 {
-        text-align: center;
-        font-weight: bold;
-        color: antiquewhite;
-        text-transform: uppercase;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-    }
+.login h3 {
+    text-align: center;
+    font-weight: bold;
+    color: antiquewhite !important;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
