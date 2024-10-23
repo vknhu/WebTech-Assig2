@@ -2,6 +2,7 @@
 import CryptoJS from 'crypto-js';
 import SHA256 from 'crypto-js/sha256';
 import { Link } from "react-router-dom";
+import "./Login.css";
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -42,10 +43,8 @@ function Login() {
                     <button type="submit" class="btn btn-primary">Login</button>
                 </div>
             </form>
-            <div className="login">
-                <p className="inline-text">Don't have Account? </p>
-                <Link to="/Register" type="submit" class="btn btn-success register-link">Register</Link>
-            </div>
+                <p className="mt-3">Don't have Account? </p>
+                <Link to="/Register.js" type="submit" class="btn btn-success register-link">Register</Link>
         </div>
     );
 }

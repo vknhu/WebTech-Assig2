@@ -12,10 +12,9 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />}>
-                    <Route path="Home" element={<Navigate to="http://localhost:5147/Home" replace />} />
-                    <Route path="About" element={<Navigate to="http://localhost:5147/About" replace />} />
+                    {/*<Route path="Home" element={} />*/}
+                    {/*<Route path="About" element={} />*/}
                     <Route path="Login" element={<Login />} />
-                    <Route path="*" element={<Navigate to="http://localhost:5147/Home" replace />} />
                 </Route>
             </Routes>
         </BrowserRouter>
