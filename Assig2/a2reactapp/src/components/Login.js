@@ -44,7 +44,7 @@ function Login() {
             </form>
             <div className="login">
                 <p>Don't have Account? </p>
-                <Link to="/" type="submit" class="btn btn-success">Register</Link>
+                <Link to="/Register" type="submit" class="btn btn-success">Register</Link>
             </div>
         </div>
     );
