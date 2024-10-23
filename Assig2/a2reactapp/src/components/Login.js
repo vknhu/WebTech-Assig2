@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
+import SHA256 from 'crypto-js/sha256';
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -9,7 +10,7 @@ function Login() {
     function handleLogin() {
         const passwordHashed = CryptoJS.SHA256(password).toString();
 
-        fetch(`http://localhost:5137/api/Login?userName=${username}&passwordHash=${passwordHashed}`, {
+        fetch(`http://localhost:5147/api/Login?userName=${username}&passwordHash=${passwordHashed}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', }
         }).then(response => response.json())
