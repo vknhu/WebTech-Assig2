@@ -1,5 +1,5 @@
-﻿.login {
-    background-color: white;
+﻿.register {
+    background-color: darkcyan !important; /* Adding !important to ensure the background color applies */
     width: 25%;
     margin: 50px auto;
     padding: 40px;
@@ -7,48 +7,35 @@
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
 }
 
-.loginForm .inputGroup {
+.registerForm .inputGroup {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.loginForm .inputGroup label {
-    margin-top: 10px;
-}
+    .registerForm .inputGroup label {
+        margin-top: 10px;
+        text-align: left;
+        color: antiquewhite;
+    }
 
-.loginForm .inputGroup input {
-    margin-top: 5px;
-    padding: 10px;
-}
+    .registerForm .inputGroup input {
+        margin-top: 5px;
+        padding: 10px;
+    }
 
 .inputGroup button {
     margin-top: 10px;
 }
 
-.login {
-    margin-top: 30px;
-    text-align: center;
+.register .btn.btn-success {
+    width: 50%;
 }
 
-.login .btn.btn-success {
-    width: 50%;
-    }
-
-.login h3 {
+.register h3 {
     text-align: center;
     font-weight: bold;
-    color: darkcyan;
+    color: antiquewhite !important;
     text-transform: uppercase;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
-
-.login-link {
-    display: inline;
-    margin-left: 5px;
-}
-
-.inline-text {
-    display: inline;
-}
-
