@@ -1,0 +1,27 @@
+﻿.container {
+    margin-top: 20px;
+}
+
+.bg-gradient {
+    background: #52796f/*linear-gradient(to right, #ffecb3, #ffc107)*/;
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
