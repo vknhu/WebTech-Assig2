@@ -24,7 +24,7 @@
         padding: 10px;
     }
 
-.inputGroup button {
+.inputGroup .btn.btn-success {
     margin-top: 10px;
     background-color: #cad2c5;
 }

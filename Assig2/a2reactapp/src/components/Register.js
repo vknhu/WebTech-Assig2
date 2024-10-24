@@ -41,7 +41,7 @@ function Register() {
                     <label htmlFor="Password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your Password"
                         value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <button type="submit" className="btn btn-success">Register</button>
+                    <Link to="/Login" type="submit" className="btn btn-success">Register</Link>
                 </div>
             </form>
             <p className="mt-3">Already have an Account?</p>

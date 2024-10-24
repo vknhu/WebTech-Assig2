@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import About from './About';
+import Dashboard from './components/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,9 +16,11 @@ root.render(
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route path="Home" element={<Login />} />
+                    <Route path="About" element={<About />} />
                     <Route path="Login" element={<Login />} />
                     <Route path="Register" element={<Register />} />
-                    <Route path="About" element={<About /> }/>
+                    <Route path="Dashboard" element={<Dashboard />} />
+                    <Route path="" element={<Login />} />
                 </Route>
             </Routes>
         </BrowserRouter>

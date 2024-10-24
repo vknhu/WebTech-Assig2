@@ -40,7 +40,7 @@ function Login() {
                     <label htmlFor="Password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your Password"
                         value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <button type="submit" className="btn btn-success">Login</button>
+                    <Link to="/Dashboard" type="submit" className="btn btn-success">Login</Link>
                 </div>
             </form>
             <p className="mt-3">Don't have an Account?</p>
