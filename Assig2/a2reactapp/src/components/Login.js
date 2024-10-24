@@ -40,11 +40,11 @@ function Login() {
                     <label htmlFor="Password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your Password"
                         value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-success">Login</button>
                 </div>
             </form>
             <p className="mt-3">Don't have an Account?</p>
-            <Link to="/Register" className="btn btn-success">Register</Link>
+            <Link to="/Register" className="register-link btn btn-success">Register</Link>
         </div>
     );
 }

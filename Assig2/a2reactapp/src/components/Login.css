@@ -26,10 +26,12 @@
 
 .inputGroup button {
     margin-top: 10px;
+    background-color: #cad2c5;
 }
 
-.login .btn.btn-success {
+.login .register-link {
     width: 50%;
+    background-color: mediumaquamarine;
 }
 
 .login h3 {
