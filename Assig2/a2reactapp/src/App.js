@@ -15,7 +15,6 @@ function App() {
                         <div class="navbar-nav flex-grow-1">
                             <Link className="nav-link" to="/Home">Home</Link>
                             <Link className="nav-link" to="/About">About</Link>
-                            <Link className="nav-link" to="/Login">Login</Link>
                         </div>
                     </div >
                 </div >
