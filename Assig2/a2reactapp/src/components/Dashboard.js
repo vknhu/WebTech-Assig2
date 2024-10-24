@@ -44,6 +44,7 @@ function Dashboard() {
                         </div>
                     </div>
                 </form>
+                <Link to="/" className="btn btn-success">Show Report</Link>
             </div>
         </div>
     )
