@@ -10,11 +10,8 @@ function Dashboard() {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', }
         }).then(response => response.json())
-            .then(data => setSuburb(data)
-                .catch(err => {
-                    console.log(err);
-                })
-            )
+            .then(data => setSuburb(data))
+            .catch(err => { console.log(err); })
     }, []);
 
     function onSubmit(e) {
@@ -32,15 +29,8 @@ function Dashboard() {
                         <div className="col-3">
                             <input type="text" name="searchText" className="form-control" placeholder="Type your query" />
                         </div>
-                        {/*<div class="col-3">*/}
-                        {/*    <select id="SuburbList" placeholder="Suburbs">*/}
-                        {/*        {suburbs.map((suburb, index) => (*/}
-                        {/*            <option key={index} value={suburb}>{suburb}</option>*/}
-                        {/*        ))}*/}
-                        {/*    </select>*/}
-                        {/*</div>*/}
                         <div className="col-3">
-                            <select id="SuburbList" className="form-control" value={selectedSuburb} onChange={handleSuburbChange}>
+                            <select id="SuburbList" className="form-control" placeholder="Select a suburb">
                                 <option value="" disabled>Select a suburb</option>
                                 {suburbs.map((suburb, index) => (
                                     <option key={index} value={suburb}>{suburb}</option>
@@ -48,7 +38,7 @@ function Dashboard() {
                             </select>
                         </div>
                         <div className="col text-left">
-                            <button type="button" className="btn btn-primary" /*onClick={searchQuery}*/>Search</button>
+                            <button type="button" className="btn btn-primary">Search</button>
                         </div>
                     </div>
                 </form>
