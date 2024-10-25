@@ -32,8 +32,16 @@ function Dashboard() {
                         <div className="col-3">
                             <input type="text" name="searchText" className="form-control" placeholder="Type your query" />
                         </div>
-                        <div class="col-3">
-                            <select id="SuburbList" placeholder="Suburbs">
+                        {/*<div class="col-3">*/}
+                        {/*    <select id="SuburbList" placeholder="Suburbs">*/}
+                        {/*        {suburbs.map((suburb, index) => (*/}
+                        {/*            <option key={index} value={suburb}>{suburb}</option>*/}
+                        {/*        ))}*/}
+                        {/*    </select>*/}
+                        {/*</div>*/}
+                        <div className="col-3">
+                            <select id="SuburbList" className="form-control" value={selectedSuburb} onChange={handleSuburbChange}>
+                                <option value="" disabled>Select a suburb</option>
                                 {suburbs.map((suburb, index) => (
                                     <option key={index} value={suburb}>{suburb}</option>
                                 ))}
