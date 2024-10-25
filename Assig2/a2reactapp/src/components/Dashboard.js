@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 function Dashboard() {
     const [suburbs, setSuburb] = useState([]);
+    const [selectedSuburb, setSelectedSuburb] = useState("");
 
     useEffect(() => {
         fetch(`http://localhost:5147/api/Get_ListCameraSuburbs`, {
@@ -18,6 +19,10 @@ function Dashboard() {
         e.preventDefault();
     }
 
+    function handleSuburbChange(e) {
+        setSelectedSuburb(e.target.value);
+    }
+
     return (
         <div class="container">
             <div class="text-dark bg-gradient p-2 my-2 border rounded">
@@ -30,7 +35,7 @@ function Dashboard() {
                             <input type="text" name="searchText" className="form-control" placeholder="Type your query" />
                         </div>
                         <div className="col-3">
-                            <select id="SuburbList" className="form-control" placeholder="Select a suburb">
+                            <select id="SuburbList" className="form-control" placeholder="Select a suburb" value={selectedSuburb} onChange={handleSuburbChange}>
                                 <option value="" disabled>Select a suburb</option>
                                 {suburbs.map((suburb, index) => (
                                     <option key={index} value={suburb}>{suburb}</option>
