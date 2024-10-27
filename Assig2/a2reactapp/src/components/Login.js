@@ -19,11 +19,12 @@ function Login() {
         }).then(response => response.json())
             .then(data => {
                 if (data == true) {
+                    // Store login status in localStorage
+                    localStorage.setItem('isAuthenticated', 'true');
                     setLoginStatus(true);
                     // If login is successful, redirect to Dashboard
                     navigate('/Dashboard');
                 } else {
-                    // If login fails, show warning text
                     setLoginStatus('Username or Password is incorrect');
                 }
             })

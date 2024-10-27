@@ -1,19 +1,27 @@
 ﻿import "./Dashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 
 function Dashboard() {
     const [suburbs, setSuburb] = useState([]);
     const [selectedSuburb, setSelectedSuburb] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5147/api/Get_ListCameraSuburbs`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json', }
-        }).then(response => response.json())
-            .then(data => setSuburb(data))
-            .catch(err => { console.log(err); })
-    }, []);
+        // Check if the user is authenticated
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        if (isAuthenticated !== 'true') {
+            // If not authenticated, redirect to the login page
+            navigate('/Login');
+        } else {
+            fetch(`http://localhost:5147/api/Get_ListCameraSuburbs`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', }
+            }).then(response => response.json())
+                .then(data => setSuburb(data))
+                .catch(err => { console.log(err); })
+        }
+    }, [navigate]);
 
     function onSubmit(e) {
         e.preventDefault();
@@ -26,7 +34,7 @@ function Dashboard() {
     return (
         <div class="container">
             <div class="d-flex justify-content-between align-items-center text-light bg-gradient p-2 my-2 border rounded">
-                <h2>MPDC Dashboard</h2>
+                <h2>Welcome to MPDC Dashboard!</h2>
                 <p class="mb-0">
                     <Link to="/Login" class="text-light">Log out</Link>
                 </p>
