@@ -25,8 +25,11 @@ function Dashboard() {
 
     return (
         <div class="container">
-            <div class="text-dark bg-gradient p-2 my-2 border rounded">
+            <div class="d-flex justify-content-between align-items-center text-light bg-gradient p-2 my-2 border rounded">
                 <h2>MPDC Dashboard</h2>
+                <p class="mb-0">
+                    <Link to="/Login" class="text-light">Log out</Link>
+                </p>
             </div>
             <div class="row">
                 <form method="post" onSubmit={onSubmit} className="row justify-content-start mb-3">
