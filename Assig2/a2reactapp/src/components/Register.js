@@ -1,33 +1,33 @@
-﻿import React, { useState } from 'react';
-import CryptoJS from 'crypto-js';
+﻿import React, { useState } from "react";
+import CryptoJS from "crypto-js";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
 function Register() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [registerStatus, setRegisterStatus] = useState('');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [registerStatus, setRegisterStatus] = useState("");
     const navigate = useNavigate();
 
     function handleRegister() {
         const passwordHashed = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
         fetch(`http://localhost:5147/api/Register?userName=${username}&passwordHash=${passwordHashed}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
         })
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    setRegisterStatus('Registration Successful');
-                    navigate('/Login');
+                    setRegisterStatus("Registration Successful");
+                    navigate("/Login");
                 } else {
-                    setRegisterStatus('Username already exists');
+                    setRegisterStatus("Username already exists");
                 }
             })
             .catch(err => {
                 console.log(err);
-                setRegisterStatus('An error occurred during registration');
+                setRegisterStatus("An error occurred during registration");
             });
     }
 
