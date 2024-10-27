@@ -19,6 +19,7 @@ function Login() {
         }).then(response => response.json())
             .then(data => {
                 if (data == true) {
+                    setLoginStatus(true);
                     // If login is successful, redirect to Dashboard
                     navigate('/Dashboard');
                 } else {

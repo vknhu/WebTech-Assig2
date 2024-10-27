@@ -1,12 +1,13 @@
 ﻿import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
 function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [registerStatus, setRegisterStatus] = useState('');
+    const navigate = useNavigate();
 
     function handleRegister() {
         const passwordHashed = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
@@ -17,7 +18,12 @@ function Register() {
         })
             .then(response => response.json())
             .then(data => {
-                setRegisterStatus(data ? 'Registration Successful' : 'Registration Failed');
+                if (data) {
+                    setRegisterStatus('Registration Successful');
+                    navigate('/Login');
+                } else {
+                    setRegisterStatus('Username already exists');
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -41,9 +47,10 @@ function Register() {
                     <label htmlFor="Password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your Password"
                         value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <Link to="/Login" type="submit" className="btn btn-success">Register</Link>
+                    <button type="submit" className="btn btn-success">Register</button>
                 </div>
             </form>
+            {registerStatus && <p className="text-warning">{registerStatus}</p>}
             <p className="mt-3">Already have an Account?</p>
             <Link to="/Login" className="login-link btn btn-success">Login</Link>
         </div>
