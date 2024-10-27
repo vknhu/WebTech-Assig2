@@ -1,12 +1,13 @@
 ﻿import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
 import SHA256 from 'crypto-js/sha256';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loginStatus, setLoginStatus] = useState(false);
+    const navigate = useNavigate();
 
 
     function handleLogin() {
@@ -17,7 +18,13 @@ function Login() {
             headers: { 'Content-Type': 'application/json', }
         }).then(response => response.json())
             .then(data => {
-                setLoginStatus(data ? 'Login Successful' : 'Login Failed');
+                if (data == true) {
+                    // If login is successful, redirect to Dashboard
+                    navigate('/Dashboard');
+                } else {
+                    // If login fails, show warning text
+                    setLoginStatus('Username or Password is incorrect');
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -40,9 +47,10 @@ function Login() {
                     <label htmlFor="Password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your Password"
                         value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <Link to="/Dashboard" type="submit" className="btn btn-success">Login</Link>
+                    <button type="submit" className="btn btn-success">Login</button>
                 </div>
             </form>
+            {loginStatus && <p className="text-danger">{loginStatus}</p>}
             <p className="mt-3">Don't have an Account?</p>
             <Link to="/Register" className="register-link btn btn-success">Register</Link>
         </div>
