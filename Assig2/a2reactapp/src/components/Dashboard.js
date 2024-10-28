@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 function Dashboard() {
     const [suburbs, setSuburb] = useState([]);
     const [selectedSuburb, setSelectedSuburb] = useState("");
+    const [startDate, setStartDate] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,6 +30,10 @@ function Dashboard() {
 
     function handleSuburbChange(e) {
         setSelectedSuburb(e.target.value);
+    }
+
+    function handleStartDateChange(e) {
+        setStartDate(e.target.value);
     }
 
     function handleLogout() {
@@ -56,6 +61,9 @@ function Dashboard() {
                                     <option key={index} value={suburb}>{suburb}</option>
                                 ))}
                             </select>
+                        </div>
+                        <div className="col-2">
+                            <input type="date" className="form-control" value={startDate} onChange={handleStartDateChange} />
                         </div>
                         <div className="col text-left">
                             <button type="button" className="btn btn-primary">Search</button>
