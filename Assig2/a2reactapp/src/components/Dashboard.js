@@ -5,7 +5,8 @@ import React, { useState, useEffect } from "react";
 function Dashboard() {
     const [suburbs, setSuburb] = useState([]);
     const [selectedSuburb, setSelectedSuburb] = useState("");
-    const [startDate, setStartDate] = useState();
+    const [startDate, setStartDate] = useState("");
+    const [checkbox, setCheckbox] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,6 +37,10 @@ function Dashboard() {
         setStartDate(e.target.value);
     }
 
+    function handleCheckboxChange(e) {
+        setCheckbox(e.target.checked);
+    }
+
     function handleLogout() {
         localStorage.setItem("isAuthenticated", "false");
     }
@@ -64,6 +69,10 @@ function Dashboard() {
                         </div>
                         <div className="col-2">
                             <input type="date" className="form-control" value={startDate} onChange={handleStartDateChange} />
+                        </div>
+                        <div className="col-1 d-flex align-items-center">
+                            <input type="checkbox" className="form-control me-2" value={checkbox} onChange={handleCheckboxChange} />
+                            <label className="form-check-label me-2">Checkbox</label>
                         </div>
                         <div className="col text-left">
                             <button type="button" className="btn btn-primary">Search</button>
