@@ -60,7 +60,7 @@ function Dashboard() {
                             <input type="text" name="searchText" className="form-control" placeholder="Type your query" />
                         </div>
                         <div className="col-3">
-                            <select id="SuburbList" className="form-control" placeholder="Select a suburb" value={selectedSuburb} onChange={handleSuburbChange}>
+                            <select id="SuburbList" className="form-control" placeholder="Select a suburb" value={selectedSuburb} onChange={handleSuburbChange} required>
                                 <option value="" disabled>Select a suburb</option>
                                 {suburbs.map((suburb, index) => (
                                     <option key={index} value={suburb}>{suburb}</option>
