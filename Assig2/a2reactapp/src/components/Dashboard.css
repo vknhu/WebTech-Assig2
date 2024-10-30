@@ -1,1 +1,7 @@
-﻿
+﻿.date-label {
+    flex: 0 0 100px;
+}
+
+.date-input {
+    flex: 1 1 auto
+}

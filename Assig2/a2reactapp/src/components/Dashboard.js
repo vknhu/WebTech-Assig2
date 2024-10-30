@@ -53,34 +53,35 @@ function Dashboard() {
                     <Link to="/Login" onClick={handleLogout} class="text-light">Log out</Link>
                 </p>
             </div>
-            <div class="row">
-                <form method="post" onSubmit={onSubmit} className="row justify-content-start mb-3">
-                    <div className="row justify-content-center-start mb-3">
-                        <div className="col-3">
-                            <input type="text" name="searchText" className="form-control" placeholder="Type your query" />
-                        </div>
-                        <div className="col-3">
-                            <select id="SuburbList" className="form-control" placeholder="Select a suburb" value={selectedSuburb} onChange={handleSuburbChange} required>
-                                <option value="" disabled>Select a suburb</option>
-                                {suburbs.map((suburb, index) => (
-                                    <option key={index} value={suburb}>{suburb}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="col-2">
-                            <input type="date" className="form-control" value={startDate} onChange={handleStartDateChange} />
-                        </div>
-                        <div className="col-1 d-flex align-items-center">
-                            <input type="checkbox" className="form-control me-2" value={checkbox} onChange={handleCheckboxChange} />
-                            <label className="form-check-label me-2">Checkbox</label>
-                        </div>
-                        <div className="col text-left">
-                            <button type="button" className="btn btn-primary">Search</button>
+            <div className="row">
+                <form method="post" onSubmit={onSubmit} className="row justify-content-left mb-4 p-3">
+                    <div className="col-3 mb-3">
+                        <input type="text" name="searchText" className="form-control" placeholder="Type your query" />
+                    </div>
+                    <div className="col-3 mb-3">
+                        <select id="SuburbList" className="form-control" placeholder="Select a suburb" value={selectedSuburb} onChange={handleSuburbChange} required>
+                            <option value="" disabled>Select a suburb</option>
+                            {suburbs.map((suburb, index) => (
+                                <option key={index} value={suburb}>{suburb}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="col-3 mb-3 d-flex align-items-center">
+                        <label htmlFor="startDate" className="form-label date-label">From Date</label>
+                        <input type="date" id="startDate" className="form-control date-input" value={startDate} onChange={handleStartDateChange} />
+                    </div>
+                    <div className="col-2 mb-3 d-flex align-items-center">
+                        <div className="form-check me-2">
+                            <input type="checkbox" className="form-check-input" value={checkbox} onChange={handleCheckboxChange} />
+                            <label className="form-check-label">Checkbox</label>
                         </div>
                     </div>
+                    <div className="col-auto">
+                        <button type="submit" className="btn btn-primary">Search</button>
+                    </div>
                 </form>
-                <Link to="/Report" className="btn btn-success">Show Report</Link>
             </div>
+            <Link to="/Report" className="btn btn-success">Show Report</Link>
         </div>
     )
 }
