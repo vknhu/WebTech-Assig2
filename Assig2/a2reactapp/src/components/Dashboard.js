@@ -62,7 +62,18 @@ function Dashboard() {
     }
 
     function handleSelectedCameras(e) {
+        const { value } = e.target;
+
+        setSelectedCameras(prevSelected =>
+            prevSelected.includes(value)
+                ? prevSelected.filter(item => item !== value)
+                : [...prevSelected, value]                     
+        );
     }
+    // Check if the  selected camera list is updated
+    useEffect(() => {
+        console.log("Updated selected camera types:", selectedCameras);
+    }, [selectedCameras]);
 
     function handleStartDateChange(e) {
         setStartDate(e.target.value);
@@ -104,7 +115,8 @@ function Dashboard() {
                                 {cameraTypes.map((camera, index) => (
                                     <li key={index}>
                                         <label className="dropdown-item">
-                                            <input type="checkbox" value={camera.value} className="me-2" onChange={handleSelectedCameras} />{camera.label}
+                                            <input type="checkbox" value={camera.value} className="me-2" onChange={handleSelectedCameras}
+                                                checked={selectedCameras.includes(camera.value)} />{camera.label}
                                         </label>
                                     </li>
                                 ))}
