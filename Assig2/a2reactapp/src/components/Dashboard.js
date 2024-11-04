@@ -29,21 +29,25 @@ function Dashboard() {
     useEffect(() => {
         if (selectedSuburb) {
             console.log("Fetching camera types for suburb:", selectedSuburb);
-            fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${encodeURIComponent(selectedSuburb)}&cameraIdsOnly=false`)
+            fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${selectedSuburb}&cameraIdsOnly=false`)
                 .then(response => response.json())
                 .then(data => {
                     if (Array.isArray(data)) {
                         console.log(data);
-                        setCameraTypes(data.map(camera => ({
-                            value: camera.CameraTypeCode,
-                            label: camera.CameraType1
-                        })));
+                        const uniqueCameraTypes = Array.from(
+                            new Map(data.map(item => [item.cameraType1, item])).values()
+                        ).map(camera => ({
+                            value: camera.cameraTypeCode,
+                            label: camera.cameraType1
+                        }));
+                        setCameraTypes(uniqueCameraTypes);
                     } else {
                         console.error("Unexpected data format:", data);
                         setCameraTypes([]);
                     }
                 })
                 .catch(err => console.error("Error fetching camera types:", err));
+            console.log(`http://localhost:5147/api/Get_ListCamerasInSuburb=${selectedSuburb}&cameraIdsOnly=false`);
         }
     }, [selectedSuburb]);
 
@@ -59,10 +63,6 @@ function Dashboard() {
     function handleStartDateChange(e) {
         setStartDate(e.target.value);
     }
-
-    //function handleCheckboxChange(e) {
-    //    setCheckbox(e.target.checked);
-    //}
 
     function handleOffenceSearch(e) {
         setDesc(e.target.value);
