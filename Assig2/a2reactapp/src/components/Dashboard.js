@@ -27,18 +27,26 @@ function Dashboard() {
     }, [navigate]);
 
     useEffect(() => {
-        console.log("Fetching camera types for suburb:", selectedSuburb);
-        fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${selectedSuburb}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log("Camera types loaded:", data);
-                setCameraTypes(data.map(camera => ({
-                    value: camera.CameraTypeCode,
-                    label: camera.CameraType1
-                })));
-            })
-            .catch(err => console.log("Error fetching camera types:", err));
+        if (selectedSuburb) {
+            console.log("Fetching camera types for suburb:", selectedSuburb);
+            fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${encodeURIComponent(selectedSuburb)}&cameraIdsOnly=false`)
+                .then(response => response.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        console.log(data);
+                        setCameraTypes(data.map(camera => ({
+                            value: camera.CameraTypeCode,
+                            label: camera.CameraType1
+                        })));
+                    } else {
+                        console.error("Unexpected data format:", data);
+                        setCameraTypes([]);
+                    }
+                })
+                .catch(err => console.error("Error fetching camera types:", err));
+        }
     }, [selectedSuburb]);
+
 
     function onSubmit(e) {
         e.preventDefault();
@@ -101,21 +109,15 @@ function Dashboard() {
                                 className="btn btn-secondary dropdown-toggle"
                                 type="button"
                                 id="checkboxDropdown"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
+                                onClick={() => document.getElementById("cameraTypeDropdown").classList.toggle("show")}
                             >
                                 Select Camera Types
                             </button>
-                            <ul className="dropdown-menu p-2" aria-labelledby="checkboxDropdown">
+                            <ul id="cameraTypeDropdown" className="dropdown-menu p-2" aria-labelledby="checkboxDropdown">
                                 {cameraTypes.map((camera, index) => (
                                     <li key={index}>
                                         <label className="dropdown-item">
-                                            <input
-                                                type="checkbox"
-                                                value={camera.value}
-                                                className="me-2"
-                                            />
-                                            {camera.label}
+                                            <input type="checkbox" value={camera.value} className="me-2" />{camera.label}
                                         </label>
                                     </li>
                                 ))}
