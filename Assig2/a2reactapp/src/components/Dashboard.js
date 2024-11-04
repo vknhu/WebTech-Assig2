@@ -7,7 +7,7 @@ function Dashboard() {
     const [selectedSuburb, setSelectedSuburb] = useState("");
     const [desc, setDesc] = useState("");
     const [startDate, setStartDate] = useState("");
-    const [checkbox, setCheckbox] = useState(false);
+    const [cameraTypes, setCameraTypes] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,6 +26,20 @@ function Dashboard() {
             fetch(`http://localhost:5147/api/Get_`)
         }
     }, [navigate]);
+
+    useEffect(() => {
+        if (selectedSuburb) {
+            fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${selectedSuburb}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json", }
+            }).then(response => response.json())
+                .then(data => setCameraTypes(data.map(camera => ({
+                    value: camera.CameraTypeCode,
+                    label: camera.CameraType1
+                }))))
+                .catch(err => { console.log(err); });
+        }
+    }, [selectedSuburb]);
 
     function onSubmit(e) {
         e.preventDefault();
