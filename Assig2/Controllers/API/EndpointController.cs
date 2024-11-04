@@ -152,7 +152,8 @@ namespace Assig2.Controllers.API
 			var dateRangeStart = DateOnlyRange_IHateTimezones(startTime, -1);
 			var dateRangeEnd = DateOnlyRange_IHateTimezones(endTime, 1);
 
-			offenceCodes ??= new List<string>(); //Initialize List if it's null / default
+			offenceCodes ??= new List<string>(); //Initialize List if it's null
+												 /// default
 
 			var offencesContext = _context.Expiations;
 			IQueryable<Expiation>? offences;

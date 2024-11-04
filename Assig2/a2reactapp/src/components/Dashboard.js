@@ -23,22 +23,21 @@ function Dashboard() {
             }).then(response => response.json())
                 .then(data => setSuburb(data))
                 .catch(err => { console.log(err); });
-            fetch(`http://localhost:5147/api/Get_`)
         }
     }, [navigate]);
 
     useEffect(() => {
-        if (selectedSuburb) {
-            fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${selectedSuburb}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json", }
-            }).then(response => response.json())
-                .then(data => setCameraTypes(data.map(camera => ({
+        console.log("Fetching camera types for suburb:", selectedSuburb);
+        fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${selectedSuburb}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Camera types loaded:", data);
+                setCameraTypes(data.map(camera => ({
                     value: camera.CameraTypeCode,
                     label: camera.CameraType1
-                }))))
-                .catch(err => { console.log(err); });
-        }
+                })));
+            })
+            .catch(err => console.log("Error fetching camera types:", err));
     }, [selectedSuburb]);
 
     function onSubmit(e) {
@@ -53,9 +52,9 @@ function Dashboard() {
         setStartDate(e.target.value);
     }
 
-    function handleCheckboxChange(e) {
-        setCheckbox(e.target.checked);
-    }
+    //function handleCheckboxChange(e) {
+    //    setCheckbox(e.target.checked);
+    //}
 
     function handleOffenceSearch(e) {
         setDesc(e.target.value);
@@ -66,11 +65,11 @@ function Dashboard() {
     }
 
     return (
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center text-light bg-gradient p-2 my-2 border rounded">
+        <div className="container">
+            <div className="d-flex justify-content-between align-items-center text-light bg-gradient p-2 my-2 border rounded">
                 <h2>Welcome to MPDC Dashboard!</h2>
-                <p class="mb-0">
-                    <Link to="/Login" onClick={handleLogout} class="text-light">Log out</Link>
+                <p className="mb-0">
+                    <Link to="/Login" onClick={handleLogout} className="text-light">Log out</Link>
                 </p>
             </div>
             <div className="row">
@@ -105,20 +104,18 @@ function Dashboard() {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                Select Options
+                                Select Camera Types
                             </button>
                             <ul className="dropdown-menu p-2" aria-labelledby="checkboxDropdown">
-                                {suburbs.map((option, index) => (
+                                {cameraTypes.map((camera, index) => (
                                     <li key={index}>
                                         <label className="dropdown-item">
                                             <input
                                                 type="checkbox"
-                                                value={option.value}
-                                                // checked={selectedOptions.includes(option.value)}
-                                                // onChange={() => handleOptionChange(option.value)}
+                                                value={camera.value}
                                                 className="me-2"
                                             />
-                                            {option.label}
+                                            {camera.label}
                                         </label>
                                     </li>
                                 ))}
