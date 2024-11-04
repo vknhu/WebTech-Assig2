@@ -8,6 +8,7 @@ function Dashboard() {
     const [desc, setDesc] = useState("");
     const [startDate, setStartDate] = useState("");
     const [cameraTypes, setCameraTypes] = useState([]);
+    const [selectedCameras, setSelectedCameras] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,7 +30,7 @@ function Dashboard() {
     useEffect(() => {
         if (selectedSuburb) {
             console.log("Fetching camera types for suburb:", selectedSuburb);
-            fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${selectedSuburb}&cameraIdsOnly=false`)
+            fetch(`http://localhost:5147/api/Get_ListCamerasInSuburb?suburb=${selectedSuburb}`)
                 .then(response => response.json())
                 .then(data => {
                     if (Array.isArray(data)) {
@@ -47,7 +48,7 @@ function Dashboard() {
                     }
                 })
                 .catch(err => console.error("Error fetching camera types:", err));
-            console.log(`http://localhost:5147/api/Get_ListCamerasInSuburb=${selectedSuburb}&cameraIdsOnly=false`);
+            console.log(`http://localhost:5147/api/Get_ListCamerasInSuburb=${selectedSuburb}`);
         }
     }, [selectedSuburb]);
 
@@ -58,6 +59,9 @@ function Dashboard() {
 
     function handleSuburbChange(e) {
         setSelectedSuburb(e.target.value);
+    }
+
+    function handleSelectedCameras(e) {
     }
 
     function handleStartDateChange(e) {
@@ -91,38 +95,28 @@ function Dashboard() {
                         </select>
                     </div>
                     <div className="col-3 mb-3">
-                        <input type="text" name="searchText" className="form-control" placeholder="Search Offences" value={desc} onChange={handleOffenceSearch}/>
-                    </div>
-                    <div className="col-3 mb-3 d-flex align-items-center">
-                        <label htmlFor="startDate" className="form-label date-label">From Date</label>
-                        <input type="date" id="startDate" className="form-control date-input" value={startDate} onChange={handleStartDateChange} />
-                    </div>
-                    {/*<div className="col-2 mb-3 d-flex align-items-center">*/}
-                    {/*    <div className="form-check me-2">*/}
-                    {/*        <input type="checkbox" className="form-check-input" value={checkbox} onChange={handleCheckboxChange} />*/}
-                    {/*        <label className="form-check-label">Camera Type</label>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    <div className="col-3 mb-3">
                         <div className="dropdown">
-                            <button
-                                className="btn btn-secondary dropdown-toggle"
-                                type="button"
-                                id="checkboxDropdown"
-                                onClick={() => document.getElementById("cameraTypeDropdown").classList.toggle("show")}
-                            >
-                                Select Camera Types
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="checkboxDropdown"
+                                onClick={() => document.getElementById("cameraTypeDropdown").classList.toggle("show")}>
+                                Camera Types
                             </button>
                             <ul id="cameraTypeDropdown" className="dropdown-menu p-2" aria-labelledby="checkboxDropdown">
                                 {cameraTypes.map((camera, index) => (
                                     <li key={index}>
                                         <label className="dropdown-item">
-                                            <input type="checkbox" value={camera.value} className="me-2" />{camera.label}
+                                            <input type="checkbox" value={camera.value} className="me-2" onChange={handleSelectedCameras} />{camera.label}
                                         </label>
                                     </li>
                                 ))}
                             </ul>
                         </div>
+                    </div>
+                    <div className="col-3 mb-3">
+                        <input type="text" name="searchText" className="form-control" placeholder="Search Offences" value={desc} onChange={handleOffenceSearch}/>
+                    </div>
+                    <div className="col-3 mb-3 d-flex align-items-center">
+                        <label htmlFor="startDate" className="form-label date-label">From Date</label>
+                        <input type="date" id="startDate" className="form-control date-input" value={startDate} onChange={handleStartDateChange} />
                     </div>
                     <div className="col-auto">
                         <button type="submit" className="btn btn-primary">Search</button>
