@@ -6,7 +6,7 @@ function Dashboard() {
     const [suburbs, setSuburb] = useState([]);
     const [selectedSuburb, setSelectedSuburb] = useState("");
     const [desc, setDesc] = useState("");
-    const [selectedOffences, setselectedOffences] = useState([]);
+    const [selectedOffences, setSelectedOffences] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [cameraTypes, setCameraTypes] = useState([]);
     const [selectedCameras, setSelectedCameras] = useState([]);
@@ -60,7 +60,7 @@ function Dashboard() {
                 .then(data => {
                     console.log(data);
 
-                    setselectedOffences(data.map(o => o.offenceCode));
+                    setSelectedOffences(data.map(o => o.offenceCode));
                 })
                 .catch(err => console.log(err));
         };

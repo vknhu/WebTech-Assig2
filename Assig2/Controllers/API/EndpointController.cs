@@ -102,9 +102,11 @@ namespace Assig2.Controllers.API
 		{
 			var cameraContext = _context.CameraCodes;
 			Debug.Assert(suburb != null, "Suburb was NULL here.");
-			var suburbs = await cameraContext.Where(i => i.Suburb.ToLower().StartsWith(suburb.ToLower()) || i.Suburb.ToLower().StartsWith(" " + suburb.ToLower())).Select(i => new { i.LocationId, i.CameraTypeCode, i.CameraTypeCodeNavigation.CameraType1, i.Suburb, i.RoadName, i.RoadType }).ToListAsync();
+			var suburbs = await cameraContext.Where(i => i.Suburb.ToLower().StartsWith(suburb.ToLower()) || i.Suburb.ToLower().StartsWith(" " + suburb.ToLower()))
+				.Select(i => new { i.LocationId, i.CameraTypeCode, i.CameraTypeCodeNavigation.CameraType1, i.Suburb, i.RoadName, i.RoadType }).ToListAsync();
 			//Tks to Andre for noticing some Suburbs start with " Adelaide". If this version is slower or you don't like it, relpace with previous version ->
-			// var suburbs = await cameraContext.Where(i => i.Suburb.ToLower().StartsWith(suburb.ToLower())).Select(i => new { i.LocationId, i.CameraTypeCode, i.CameraTypeCodeNavigation.CameraType1, i.Suburb, i.RoadName, i.RoadType }).ToListAsync();
+			// var suburbs = await cameraContext.Where(i => i.Suburb.ToLower().StartsWith(suburb.ToLower()))
+			// .Select(i => new { i.LocationId, i.CameraTypeCode, i.CameraTypeCodeNavigation.CameraType1, i.Suburb, i.RoadName, i.RoadType }).ToListAsync();
 			if (cameraIdsOnly)
 			{
 				return suburbs.Select(i => new { i.LocationId, i.CameraTypeCode });
@@ -152,8 +154,7 @@ namespace Assig2.Controllers.API
 			var dateRangeStart = DateOnlyRange_IHateTimezones(startTime, -1);
 			var dateRangeEnd = DateOnlyRange_IHateTimezones(endTime, 1);
 
-			offenceCodes ??= new List<string>(); //Initialize List if it's null
-												 /// default
+			offenceCodes ??= new List<string>(); //Initialize List if it's null / default
 
 			var offencesContext = _context.Expiations;
 			IQueryable<Expiation>? offences;
@@ -191,8 +192,8 @@ namespace Assig2.Controllers.API
 			{
 				offencesEnum = offencesEnum.Where(i => offenceCodes.Contains(i.OffenceCode));
 			}
-
-			return await Task.FromResult(offences.ToList());
+			//thanks Casey
+			return await Task.FromResult(offencesEnum.ToList());
 		}
 
 		/// <summary>
