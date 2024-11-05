@@ -6,7 +6,7 @@ function Dashboard() {
     const [suburbs, setSuburb] = useState([]);
     const [selectedSuburb, setSelectedSuburb] = useState("");
     const [desc, setDesc] = useState("");
-    const [selectedDesc, setSelectedDesc] = useState("");
+    const [selectedOffences, setselectedOffences] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [cameraTypes, setCameraTypes] = useState([]);
     const [selectedCameras, setSelectedCameras] = useState([]);
@@ -59,11 +59,16 @@ function Dashboard() {
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    setSelectedDesc(data)
+
+                    setselectedOffences(data.map(o => o.offenceCode));
                 })
                 .catch(err => console.log(err));
         };
     }, [desc]);
+    // Check if the  selected offenc list is updated
+    useEffect(() => {
+        console.log("Updated selected offences:", selectedOffences);
+    }, [selectedOffences]);
 
     function onSubmit(e) {
         e.preventDefault();
