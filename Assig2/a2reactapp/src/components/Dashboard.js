@@ -10,7 +10,7 @@ function Dashboard() {
     const [startDate, setStartDate] = useState("");
     const [cameraTypes, setCameraTypes] = useState([]);
     const [selectedCameras, setSelectedCameras] = useState([]);
-    const [locationIds, setLocationIds] = useState([]);
+    const [locationIds, setLocationIds] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -72,10 +72,13 @@ function Dashboard() {
     }, [selectedOffences]);
 
     useEffect(() => {
-        fetch(`http://localhost:5147/api/Get_ListLocationId?suburb=${selectedSuburb}&cameraTypeCodes=${selectedCameras}`)
+        if (selectedSuburb) {
+            const cameraTypeCodes = selectedCameras.length > 0 ? selectedCameras.join(',') : '';
+            fetch(`http://localhost:5147/api/Get_ListLocationId?suburb=${selectedSuburb}&cameraTypeCodes=${cameraTypeCodes}`)
             .then(response => response.json())
             .then(data => setLocationIds(data))
-            .catch(err => console.log(err));
+                .catch(err => console.log(err));
+        }
     }, [selectedSuburb, selectedCameras]);
 
     function onSubmit(e) {
