@@ -10,6 +10,7 @@ function Dashboard() {
     const [startDate, setStartDate] = useState("");
     const [cameraTypes, setCameraTypes] = useState([]);
     const [selectedCameras, setSelectedCameras] = useState([]);
+    const [locationIds, setLocationIds] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -69,6 +70,13 @@ function Dashboard() {
     useEffect(() => {
         console.log("Updated selected offences:", selectedOffences);
     }, [selectedOffences]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5147/api/Get_ListLocationId?suburb=${selectedSuburb}&cameraTypeCodes=${selectedCameras}`)
+            .then(response => response.json())
+            .then(data => setLocationIds(data))
+            .catch(err => console.log(err));
+    }, [selectedSuburb, selectedCameras]);
 
     function onSubmit(e) {
         e.preventDefault();
