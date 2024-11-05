@@ -6,6 +6,7 @@ function Dashboard() {
     const [suburbs, setSuburb] = useState([]);
     const [selectedSuburb, setSelectedSuburb] = useState("");
     const [desc, setDesc] = useState("");
+    const [selectedDesc, setSelectedDesc] = useState("");
     const [startDate, setStartDate] = useState("");
     const [cameraTypes, setCameraTypes] = useState([]);
     const [selectedCameras, setSelectedCameras] = useState([]);
@@ -52,6 +53,17 @@ function Dashboard() {
         }
     }, [selectedSuburb]);
 
+    useEffect(() => {
+        if (desc) {
+            fetch(`http://localhost:5147/api/Get_SearchOffencesByDescription?searchTerm=${desc}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    setSelectedDesc(data)
+                })
+                .catch(err => console.log(err));
+        };
+    }, [desc]);
 
     function onSubmit(e) {
         e.preventDefault();
@@ -115,8 +127,7 @@ function Dashboard() {
                                 {cameraTypes.map((camera, index) => (
                                     <li key={index}>
                                         <label className="dropdown-item">
-                                            <input type="checkbox" value={camera.value} className="me-2" onChange={handleSelectedCameras}
-                                                checked={selectedCameras.includes(camera.value)} />{camera.label}
+                                            <input type="checkbox" value={camera.value} className="me-2" onChange={handleSelectedCameras} />{camera.label}
                                         </label>
                                     </li>
                                 ))}
