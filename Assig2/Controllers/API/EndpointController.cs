@@ -303,13 +303,14 @@ namespace Assig2.Controllers.API
 		/// <param name="suburb">The Selected Suburb</param>
 		/// <param name="cameraTypeCodes">Optional: Narrows the return data to just a list of the locationIds + CameraTypeCodes (Composite Primary Key)</param>
 		/// <returns>List of locationId from the selected suburb + list of selected CameraTypeCodes
-		[HttpGet(Name = "Get_ListLocationId")]
-		public async Task<object> Get_ListLocationId(string suburb, [FromQuery] List<String>? cameraTypeCodes)
+		[HttpGet(Name = "Get_ListLocationIds")]
+		public async Task<object> Get_ListLocationIds(string suburb, [FromQuery] List<String>? cameraTypeCodes)
 		{
 			Debug.Assert(suburb != null, "Suburb was NULL here.");
+			cameraTypeCodes ??= new List<string>(); //Initialize list if it's null / default
 
 			var locationIds = await _context.CameraCodes
-				.Where(i => i.Suburb.ToLower().StartsWith(suburb.ToLower()) || i.Suburb.ToLower().StartsWith(" " + suburb.ToLower()) &&
+				.Where(i => (i.Suburb.ToLower().StartsWith(suburb.ToLower()) || i.Suburb.ToLower().StartsWith(" " + suburb.ToLower())) &&
 							(cameraTypeCodes.Count == 0 || cameraTypeCodes.Contains(i.CameraTypeCode)))
 				.Select(i => i.LocationId)
 				.Distinct()
