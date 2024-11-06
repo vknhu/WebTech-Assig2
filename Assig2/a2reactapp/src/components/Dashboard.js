@@ -93,7 +93,7 @@ function Dashboard() {
 
     function onSubmit(e) {
         e.preventDefault();
-        const unixTime = new Date(startDate).getTime() / 1000;
+        const unixTime = Math.floor(new Date(startDate).getTime() / 1000);
         const offences = selectedOffences.map(o => `offenceCodes=${encodeURIComponent(o)}`).join("&");
 
         locationIds.forEach(locationId => {
@@ -101,6 +101,7 @@ function Dashboard() {
                 fetch(`http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}&cameraTypeCode=${camera}&startTime=${unixTime}&${offences}`)
                     .then(response => response.json())
                     .then(data => {
+                        console.log("url: " + `http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}&cameraTypeCode=${camera}&startTime=${unixTime}&${offences}`)
                         console.log("Fetched expiations: " + data);
                         setExpiations(prevData => [...prevData, ...data])
                         })
@@ -108,6 +109,10 @@ function Dashboard() {
             })
         })
     }
+
+    useEffect(() => {
+        console.log("Expiations: ", expiations)
+    }, [expiations])
 
     function handleSuburbChange(e) {
         setSelectedSuburb(e.target.value);
