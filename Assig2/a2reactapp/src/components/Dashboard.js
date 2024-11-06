@@ -11,6 +11,7 @@ function Dashboard() {
     const [cameraTypes, setCameraTypes] = useState([]);
     const [selectedCameras, setSelectedCameras] = useState([]);
     const [locationIds, setLocationIds] = useState(null);
+    const [expiations, setExpiations] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -92,6 +93,20 @@ function Dashboard() {
 
     function onSubmit(e) {
         e.preventDefault();
+        const unixTime = new Date(startDate).getTime() / 1000;
+        const offences = selectedOffences.map(o => `offenceCodes=${encodeURIComponent(o)}`).join("&");
+
+        locationIds.forEach(locationId => {
+            selectedCameras.forEach(camera => {
+                fetch(`http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}&cameraTypeCode=${camera}&startTime=${unixTime}&${offences}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Fetched expiations: " + data);
+                        setExpiations(prevData => [...prevData, ...data])
+                        })
+                .catch(err => console.log(err))
+            })
+        })
     }
 
     function handleSuburbChange(e) {
