@@ -306,6 +306,7 @@ namespace Assig2.Controllers.API
 		[HttpGet(Name = "Get_ListLocationIds")]
 		public async Task<object> Get_ListLocationIds(string suburb, [FromQuery] List<String>? cameraTypeCodes)
 		{
+			Console.WriteLine($"Suburb: {suburb}, CameraTypeCodes: {string.Join(", ", cameraTypeCodes ?? new List<string>())}");
 			Debug.Assert(suburb != null, "Suburb was NULL here.");
 			cameraTypeCodes ??= new List<string>(); //Initialize list if it's null / default
 

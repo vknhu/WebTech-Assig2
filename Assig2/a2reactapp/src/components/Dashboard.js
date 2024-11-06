@@ -73,11 +73,20 @@ function Dashboard() {
 
     useEffect(() => {
         if (selectedSuburb) {
-            const cameraTypeCodes = selectedCameras.length > 0 ? selectedCameras.join(',') : '';
-            fetch(`http://localhost:5147/api/Get_ListLocationId?suburb=${selectedSuburb}&cameraTypeCodes=${cameraTypeCodes}`)
-            .then(response => response.json())
-            .then(data => setLocationIds(data))
-                .catch(err => console.log(err));
+            // Map selectedCameras to repeated query parameters
+            const cameraTypeParams = selectedCameras.map(code => `cameraTypeCodes=${encodeURIComponent(code)}`).join("&");
+            const url = `http://localhost:5147/api/Get_ListLocationIds?suburb=${selectedSuburb}` +
+                (cameraTypeParams ? `&${cameraTypeParams}` : "");
+
+            console.log("Fetch URL:", url); // For debugging
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Fetched locationIds:", data);
+                    setLocationIds(data);
+                })
+                .catch(err => console.error("Error fetching location IDs:", err));
         }
     }, [selectedSuburb, selectedCameras]);
 
