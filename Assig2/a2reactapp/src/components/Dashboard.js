@@ -145,7 +145,7 @@ function Dashboard() {
                             // Log the modified data to verify
                             console.log("Modified data added to state:", modifiedData);
                         })
-                        .catch(err => {console.error("Error fetching expiations:", err);});
+                        .catch(err => { console.error("Error fetching expiations:", err); });
                 });
             });
         }
@@ -166,7 +166,7 @@ function Dashboard() {
         setSelectedCameras(prevSelected =>
             prevSelected.includes(value)
                 ? prevSelected.filter(item => item !== value)
-                : [...prevSelected, value]                     
+                : [...prevSelected, value]
         );
     }
     // Check if the  selected camera list is updated
@@ -182,11 +182,17 @@ function Dashboard() {
         setDesc(e.target.value);
     }
 
-    function handleCheckboxChange(e, expiation) {
-        const { checked } = e.target;
-        setSelectedExpiations(prevChecked =>
-            checked ? [...prevChecked, expiation] : prevChecked.filter(item => item !== expiation)
-        );
+    function handleCheckboxChange(locationId) {
+        setSelectedExpiations(prevSelected => {
+            if (prevSelected.includes(locationId)) {
+                return prevSelected.filter(id => id !== locationId);
+            }
+            if (prevSelected.length >= 2) {
+                alert("You can only select 2 locations.");
+                return prevSelected;
+            }
+            return [...prevSelected, locationId];
+        });
     }
 
     function handleLogout() {
@@ -247,27 +253,32 @@ function Dashboard() {
                     <thead>
                         <tr>
                             <th>Select</th>
-                            <th>Expiation Code</th>
-                            <th>Description</th>
-                            <th>Amount</th>
+                            <th>Location ID</th>
+                            <th>Camera Type</th>
+                            <th>Expiation Count</th>
+                            <th>Total Fee</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {expiations.map((expiation, index) => (
+                        {expiations.map((exp, index) => (
                             <tr key={index}>
                                 <td>
-                                    <input
-                                        type="checkbox"
-                                        onChange={(e) => handleCheckboxChange(e, expiation)}
-                                    />
+                                    <input type="checkbox" checked={selectedExpiations.includes(exp.locationId)} onChange={() => handleCheckboxChange(exp.locationId)} />
                                 </td>
-                                <td>{expiation.code}</td>
-                                <td>{expiation.description}</td>
-                                <td>{expiation.amount}</td>
+                                <td>{exp.locationId}</td>
+                                <td>{exp.cameraType}</td>
+                                <td>{exp.expiationCount}</td>
+                                <td>${exp.totalFeeAmt}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Display selected location IDs */}
+            <div>
+                <h3>Selected Location IDs</h3>
+                <p>{selectedExpiations.join(", ")}</p>
             </div>
 
             <Link to="/Report" className="btn btn-success">Show Report</Link>
