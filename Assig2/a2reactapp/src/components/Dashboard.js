@@ -124,15 +124,33 @@ function Dashboard() {
                             return response.json();
                         })
                         .then(data => {
-                            setExpiations(prevData => [...prevData, ...data]);
+                            let totalFeeAmt = 0;
+                            let expiationCount = 0;
+
+                            data.forEach(exp => {
+                                if (exp.totalFeeAmt) {
+                                    totalFeeAmt += exp.totalFeeAmt;
+                                    expiationCount++;
+                                }
+                            });
+
+                            const modifiedData = {
+                                locationId: locationId,
+                                cameraType: camera,
+                                expiationCount: expiationCount,
+                                totalFeeAmt: totalFeeAmt
+                            };
+                            setExpiations(prevData => [...prevData, modifiedData]);
+
+                            // Log the modified data to verify
+                            console.log("Modified data added to state:", modifiedData);
                         })
-                        .catch(err => {
-                            console.error("Error fetching expiations:", err);
-                        });
+                        .catch(err => {console.error("Error fetching expiations:", err);});
                 });
             });
         }
     }
+
 
     useEffect(() => {
         console.log("Expiations: ", expiations)
