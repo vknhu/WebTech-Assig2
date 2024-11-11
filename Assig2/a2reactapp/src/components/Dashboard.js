@@ -133,10 +133,11 @@ function Dashboard() {
                                     expiationCount++;
                                 }
                             });
+                            const cameraTypeName = cameraTypes.find(c => c.value === camera)?.label || camera;
 
                             const modifiedData = {
                                 locationId: locationId,
-                                cameraType: camera,
+                                cameraType: cameraTypeName,
                                 expiationCount: expiationCount,
                                 totalFeeAmt: totalFeeAmt
                             };
