@@ -12,6 +12,7 @@ function Dashboard() {
     const [selectedCameras, setSelectedCameras] = useState([]);
     const [locationIds, setLocationIds] = useState(null);
     const [expiations, setExpiations] = useState([]);
+    const [selectedExpiations, setSelectedExpiations] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -140,6 +141,13 @@ function Dashboard() {
         setDesc(e.target.value);
     }
 
+    function handleCheckboxChange(e, expiation) {
+        const { checked } = e.target;
+        setSelectedExpiations(prevChecked =>
+            checked ? [...prevChecked, expiation] : prevChecked.filter(item => item !== expiation)
+        );
+    }
+
     function handleLogout() {
         localStorage.setItem("isAuthenticated", "false");
     }
@@ -191,6 +199,36 @@ function Dashboard() {
                     </div>
                 </form>
             </div>
+
+            {/* Table to display expiations */}
+            <div className="row">
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Expiation Code</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {expiations.map((expiation, index) => (
+                            <tr key={index}>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        onChange={(e) => handleCheckboxChange(e, expiation)}
+                                    />
+                                </td>
+                                <td>{expiation.code}</td>
+                                <td>{expiation.description}</td>
+                                <td>{expiation.amount}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
             <Link to="/Report" className="btn btn-success">Show Report</Link>
         </div>
     )
