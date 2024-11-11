@@ -94,6 +94,7 @@ function Dashboard() {
 
     function onSubmit(e) {
         e.preventDefault();
+        setExpiations([]);
 
         const unixTime = startDate ? Math.floor(new Date(startDate).getTime() / 1000) : null;
         const offences = selectedOffences && selectedOffences.length > 0
@@ -141,7 +142,10 @@ function Dashboard() {
                                 expiationCount: expiationCount,
                                 totalFeeAmt: totalFeeAmt
                             };
-                            setExpiations(prevData => [...prevData, modifiedData]);
+                            setExpiations(prevData => {
+                                const updatedData = [...prevData, modifiedData];
+                                return updatedData.sort((a, b) => a.locationId - b.locationId);
+                            });
 
                             // Log the modified data to verify
                             console.log("Modified data added to state:", modifiedData);
