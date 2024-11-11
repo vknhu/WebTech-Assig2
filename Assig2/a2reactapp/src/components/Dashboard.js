@@ -94,20 +94,20 @@ function Dashboard() {
     function onSubmit(e) {
         e.preventDefault();
         const unixTime = Math.floor(new Date(startDate).getTime() / 1000);
-        const offences = selectedOffences.map(o => `offenceCodes=${encodeURIComponent(o)}`).join("&");
+        const offences = selectedOffences
+            .map(o => `offenceCodes=${encodeURIComponent(o)}`)
+            .join("&");
 
-        locationIds.forEach(locationId => {
-            selectedCameras.forEach(camera => {
-                fetch(`http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}&cameraTypeCode=${camera}&startTime=${unixTime}&${offences}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("url: " + `http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}&cameraTypeCode=${camera}&startTime=${unixTime}&${offences}`)
-                        console.log("Fetched expiations: " + data);
-                        setExpiations(prevData => [...prevData, ...data])
-                        })
-                .catch(err => console.log(err))
-            })
-        })
+        if (locationIds && locationIds.length > 0) {
+            locationIds.forEach(locationId => {
+                selectedCameras.forEach(camera => {
+                    fetch(`http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}&cameraTypeCode=${camera}&startTime=${unixTime}&${offences}`)
+                        .then(response => response.json())
+                        .then(data => setExpiations(prevData => [...prevData, ...data]))
+                        .catch(err => console.error("Error fetching expiations:", err));
+                });
+            });
+        }
     }
 
     useEffect(() => {
@@ -180,7 +180,7 @@ function Dashboard() {
                         </div>
                     </div>
                     <div className="col-3 mb-3">
-                        <input type="text" name="searchText" className="form-control" placeholder="Search Offences" value={desc} onChange={handleOffenceSearch}/>
+                        <input type="text" name="searchText" className="form-control" placeholder="Search Offences" value={desc} onChange={handleOffenceSearch} />
                     </div>
                     <div className="col-3 mb-3 d-flex align-items-center">
                         <label htmlFor="startDate" className="form-label date-label">From Date</label>
