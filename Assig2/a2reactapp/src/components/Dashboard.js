@@ -94,18 +94,41 @@ function Dashboard() {
 
     function onSubmit(e) {
         e.preventDefault();
-        const unixTime = Math.floor(new Date(startDate).getTime() / 1000);
-        const offences = selectedOffences
-            .map(o => `offenceCodes=${encodeURIComponent(o)}`)
-            .join("&");
+
+        const unixTime = startDate ? Math.floor(new Date(startDate).getTime() / 1000) : null;
+        const offences = selectedOffences && selectedOffences.length > 0
+            ? selectedOffences.map(o => `offenceCodes=${encodeURIComponent(o)}`).join("&") : null;
 
         if (locationIds && locationIds.length > 0) {
             locationIds.forEach(locationId => {
-                selectedCameras.forEach(camera => {
-                    fetch(`http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}&cameraTypeCode=${camera}&startTime=${unixTime}&${offences}`)
-                        .then(response => response.json())
-                        .then(data => setExpiations(prevData => [...prevData, ...data]))
-                        .catch(err => console.error("Error fetching expiations:", err));
+                // If no cameraTypes are selected, use the list of camera types fetched for the suburb
+                const cameraTypesToUse = selectedCameras.length > 0 ? selectedCameras : cameraTypes.map(camera => camera.value);
+
+                cameraTypesToUse.forEach(camera => {
+                    let url = `http://localhost:5147/api/Get_ExpiationsForLocationId?locationId=${locationId}`;
+                    if (camera) {
+                        url += `&cameraTypeCode=${camera}`;
+                    }
+                    if (unixTime) {
+                        url += `&startTime=${unixTime}`;
+                    }
+                    if (offences) {
+                        url += `&${offences}`;
+                    }
+
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            setExpiations(prevData => [...prevData, ...data]);
+                        })
+                        .catch(err => {
+                            console.error("Error fetching expiations:", err);
+                        });
                 });
             });
         }
