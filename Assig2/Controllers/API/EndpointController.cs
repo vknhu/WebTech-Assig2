@@ -206,7 +206,7 @@ namespace Assig2.Controllers.API
 		/// <param name="offenceCodes">Optional: Return only Offences that include the current offenceCode. Multiple inputs allowed to extend the List: ["A001","A002"] </param>
 		/// <returns>firstExpiationInSet, lastExpiationInSet, totalOffencesCount, totalDemerits, totalFeeSum, avgDemeritsPerDay, avgFeePerDay, expiationDaysOfWeek</returns>
 		[HttpPost(Name = "Get_ExpiationStatsForLocationId"), HttpGet(Name = "Get_ExpiationStatsForLocationId")]
-		public Task<object> Get_ExpiationStatsForLocationId(int locationId, string? cameraTypeCode, int startTime = 0, int endTime = Int32.MaxValue, [FromQuery] List<String>? offenceCodes = null)
+		public async Task<object> Get_ExpiationStatsForLocationId(int locationId, string? cameraTypeCode, int startTime = 0, int endTime = Int32.MaxValue, [FromQuery] List<String>? offenceCodes = null)
 		{
 			Debug.Assert(cameraTypeCode == null || cameraCodes.Contains(cameraTypeCode), "Your provided cameraTypeCode wasn't in the list");
 			Debug.Assert(locationId > 0, "locationId was 0 or null. You must supply valid locationId or things will explode (this is bad). Try Get_ListCamerasInSuburb");
@@ -293,7 +293,7 @@ namespace Assig2.Controllers.API
 			avgDemeritsPerDay = 86400d / (double)diff * totalDemerits;
 			avgFeePerDay = 86400d / (double)diff * totalFeeSum;
 
-			return Task.FromResult<object>(new { firstExpiationInSet, lastExpiationInSet, totalOffencesCount, totalDemerits, totalFeeSum, avgDemeritsPerDay, avgFeePerDay, expiationDaysOfWeek });
+			return new { firstExpiationInSet, lastExpiationInSet, totalOffencesCount, totalDemerits, totalFeeSum, avgDemeritsPerDay, avgFeePerDay, expiationDaysOfWeek };
 		}
 
 		//Helper methods, don't mind me

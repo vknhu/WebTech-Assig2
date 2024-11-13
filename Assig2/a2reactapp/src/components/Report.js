@@ -52,10 +52,11 @@ function Report() {
                 </p>
             </div>
             <h3>Introduction</h3>
-            <p>This report outlines two priority locations for the installation of Mobile Phone Detection Cameras (MPDCs) based on an analysis
-                of expiation data obtained from the SAPOL database. The locations were selected using the MPDC Dashboard in the web application,
-                which features a variety of search and filtering mechanisms for optimal site identification. Below, I explain the process used
-                to determine these locations, along with relevant data visualizations to support the recommendations.</p>
+            <p>This report provides an analysis of two recommended locations in South Australia for installing
+                Mobile Phone Detection Cameras (MPDCs) based on expiation data from the SAPOL Expiations database.
+                The chosen locations are Anzac Highway and South Road, located in the same suburb but on different roads.
+                The analysis below includes key statistics such as the total number of offences, total demerits,
+                total fees collected, average demerits and fees per day, and offence distribution throughout the week.</p>
             <h3>Selected Location</h3>
             <ul>
                 <ol>Location1: Anzac Highway, Adelaide (locationId: 65)</ol>
@@ -72,7 +73,20 @@ function Report() {
                 <p>Graph 1</p>
                 <p>Graph 2</p>
             </div>
-            <h3>Explanation for location selection</h3>
+            <h3>Analysis and Justification</h3>
+            <p>
+                The two selected MPDC sites, Anzac Highway and South Road, have been identified based on their high rates of offences and the potential for improved traffic safety measures.
+                Anzac Highway has a total of 55 offences with an average of 0.64 demerits per day, while South Road shows a significantly higher number of 526 offences and an average of 6.07 demerits per day.
+                This stark difference indicates that South Road may require more stringent monitoring and enforcement due to its higher incidence of violations.
+            </p>
+            <p>
+                Furthermore, the data shows that specific days of the week have higher offence counts. For instance, South Road experiences a peak on Tuesdays (114 offences), while Anzac Highway has a notable spike on Sundays (20 offences).
+                This information is crucial for determining the optimal times for camera placement to maximize enforcement effectiveness.
+            </p>
+            <p>
+                Additionally, road design considerations, such as the presence of intersections, pedestrian crossings, and traffic flow patterns, should be taken into account.
+                Both locations are heavily trafficked, making them prime candidates for MPDC installations to enhance road safety and reduce violations.
+            </p>
             <Link to="/Dashboard" class="btn btn-success">Back to Dashboard</Link>
         </div>
 
