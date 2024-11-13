@@ -173,13 +173,14 @@ function Report() {
                 </p>
             </div>
 
-            <h3>Introduction</h3>
+            <h3>1. Introduction</h3>
             <p>This report provides an analysis of two recommended locations in South Australia for installing
                 Mobile Phone Detection Cameras (MPDCs) based on expiation data from the SAPOL Expiations database.
                 The chosen locations are Anzac Highway and South Road, located in the same suburb but on different roads.
                 The analysis below includes key statistics such as the total number of offences, total demerits,
                 total fees collected, average demerits and fees per day, and offence distribution throughout the week.</p>
-                    
+
+            <h3>2. Site Identification</h3>
             <div className="location-container">
                 <div className="location-item">
                     <p>Location 1: Anzac Highway, Adelaide (locationId: 65)</p>
@@ -190,7 +191,6 @@ function Report() {
                     <img src="/South Road Adelaide.png" alt="Google Maps Screenshot of South Road, Adelaide" />
                 </div>
             </div>
-            <h3>Site Identification</h3>
             <ul>
                 <li>Suburb: Adelaide</li>
                 <li>Camera Type: Mobile Camera</li>
@@ -210,12 +210,11 @@ function Report() {
                 insights into improving enforcement and traffic safety.
             </p>
 
-            <h3>Data visualization</h3>
+            <h3>3. Analysis and Justification</h3>
             <div className="graph-container">
                 <svg id="graph1"></svg>
                 <svg id="graph2"></svg>
             </div>
-            <h3>Analysis and Justification</h3>
             <p>
                 The two selected MPDC sites, Anzac Highway and South Road, have been carefully identified based on their notably
                 high rates of traffic offences and the potential for implementing more effective traffic safety measures. Anzac

@@ -213,7 +213,7 @@ function Dashboard() {
                 </p>
             </div>
             <div className="row">
-                <form method="post" onSubmit={onSubmit} className="row justify-content-left mb-4 p-3">
+                <form method="post" onSubmit={onSubmit} className="row justify-content-start mb-4 p-3 align-items-center">
                     <div className="col-3 mb-3">
                         <select id="SuburbList" className="form-control" placeholder="Select a suburb" value={selectedSuburb} onChange={handleSuburbChange} required>
                             <option value="" disabled>Select a suburb</option>
@@ -222,7 +222,7 @@ function Dashboard() {
                             ))}
                         </select>
                     </div>
-                    <div className="col-3 mb-3">
+                    <div className="col-2 mb-3">
                         <div className="dropdown">
                             <button className="btn btn-secondary dropdown-toggle" type="button" id="checkboxDropdown"
                                 onClick={() => document.getElementById("cameraTypeDropdown").classList.toggle("show")}>
@@ -239,18 +239,21 @@ function Dashboard() {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-3 mb-3">
+                    <div className="col-2 mb-3">
                         <input type="text" name="searchText" className="form-control" placeholder="Search Offences" value={desc} onChange={handleOffenceSearch} />
                     </div>
-                    <div className="col-3 mb-3 d-flex align-items-center">
-                        <label htmlFor="startDate" className="form-label date-label">From Date</label>
-                        <input type="date" id="startDate" className="form-control date-input" value={startDate} onChange={handleStartDateChange} />
+                    <div className="col-4 mb-3 d-flex align-items-center">
+                        <label htmlFor="startDate" className="form-label mb-0 me-2 col-3">From Date:</label>
+                        <input type="date" id="startDate" className="form-control" value={startDate} onChange={handleStartDateChange} />
                     </div>
-                    <div className="col-auto">
+                    <div className="col-auto mb-3">
                         <button type="submit" className="btn btn-primary">Search</button>
                     </div>
                 </form>
             </div>
+
+
+
 
             {/* Table to display expiations */}
             <div className="row">
