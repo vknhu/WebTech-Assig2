@@ -182,12 +182,12 @@ function Report() {
                     
             <div className="location-container">
                 <div className="location-item">
-                    <img src="/Anzac HWY Adelaide.png" alt="Google Maps Screenshot of Anzac Highway, Adelaide" />
                     <p>Location 1: Anzac Highway, Adelaide (locationId: 65)</p>
+                    <img src="/Anzac HWY Adelaide.png" alt="Google Maps Screenshot of Anzac Highway, Adelaide" />
                 </div>
                 <div className="location-item">
-                    <img src="/South Road Adelaide.png" alt="Google Maps Screenshot of South Road, Adelaide" />
                     <p>Location 2: South Road, Adelaide (locationId: 2164)</p>
+                    <img src="/South Road Adelaide.png" alt="Google Maps Screenshot of South Road, Adelaide" />
                 </div>
             </div>
             <h3>Site Identification</h3>
@@ -196,14 +196,18 @@ function Report() {
                 <li>Camera Type: Mobile Camera</li>
                 <li>Start Date: 01/01/2024</li>
             </ul>
-            <img src="/Filters.png" alt="Search options screenshot" className="site mb-2"/>
-            
-            <p>Matching locations:</p>
-            <img src="/Locations.png" alt="Returned locations" className="mb-2" />
+
+            <div className="image-container">
+                <img src="/Filters.png" alt="Search options screenshot" className="site mb-2" />
+                <img src="/Locations.png" alt="Returned locations" className="mb-2" style={{ height: '600px', objectFit: 'cover' }} />
+            </div>
+
             <p>
-                Explanation: The data reveals that some locations record no expiations, while others have hundreds. 
-                For this report, locations 65 and 2164 were selected to illustrate the significant gap in expiation counts and total fees.
-                This allows us to analyze why such differences exist between two locations with the same suburb and camera type.
+                Explanation: The data reveals a significant disparity in expiation records, with some locations having no expiations,
+                while others report hundreds. For this report, locations 65 and 2164 were selected to highlight the difference in
+                expiation counts and total fees. Despite being in the same suburb and having the same camera type, these locations
+                show notable variations, providing an opportunity to analyze the factors contributing to such discrepancies and gain
+                insights into improving enforcement and traffic safety.
             </p>
 
             <h3>Data visualization</h3>
@@ -213,17 +217,28 @@ function Report() {
             </div>
             <h3>Analysis and Justification</h3>
             <p>
-                The two selected MPDC sites, Anzac Highway and South Road, have been identified based on their high rates of offences and the potential for improved traffic safety measures.
-                Anzac Highway has a total of 55 offences with an average of 0.64 demerits per day, while South Road shows a significantly higher number of 526 offences and an average of 6.07 demerits per day.
-                This stark difference indicates that South Road may require more stringent monitoring and enforcement due to its higher incidence of violations.
+                The two selected MPDC sites, Anzac Highway and South Road, have been carefully identified based on their notably
+                high rates of traffic offences and the potential for implementing more effective traffic safety measures. Anzac
+                Highway has recorded a total of 55 offences, averaging 0.64 demerits per day. In contrast, South Road presents a
+                significantly higher offence count, totaling 526 offences with an average of 6.07 demerits per day. This stark
+                difference between the two sites highlights a critical need for more robust monitoring and enforcement measures
+                on South Road, where the frequency of violations is substantially higher.
             </p>
             <p>
-                Furthermore, the data shows that specific days of the week have higher offence counts. For instance, South Road experiences a peak on Tuesdays (114 offences), while Anzac Highway has a notable spike on Sundays (20 offences).
-                This information is crucial for determining the optimal times for camera placement to maximize enforcement effectiveness.
+                Analyzing offence patterns further reveals that certain days of the week are particularly problematic. South Road,
+                for example, experiences its peak in offences on Tuesdays, with an alarming 114 reported violations, suggesting that
+                Tuesdays may see heavier traffic or riskier driving behavior. Meanwhile, Anzac Highway experiences a notable spike
+                on Sundays, with 20 offences recorded, potentially due to different traffic dynamics, such as weekend recreational
+                travel. These insights are vital for optimizing the timing and placement of enforcement cameras, ensuring maximum
+                effectiveness in capturing violations and enhancing traffic compliance.
             </p>
             <p>
-                Additionally, road design considerations, such as the presence of intersections, pedestrian crossings, and traffic flow patterns, should be taken into account.
-                Both locations are heavily trafficked, making them prime candidates for MPDC installations to enhance road safety and reduce violations.
+                Moreover, several road design elements must be considered when planning the installation of MPDC units at these
+                locations. Both Anzac Highway and South Road feature critical infrastructure, including intersections, pedestrian
+                crossings, and unique traffic flow patterns, which contribute to their high traffic volume and associated risks.
+                These factors underscore the importance of strategic camera positioning to monitor key risk areas and improve
+                safety outcomes. Given the heavy traffic and complex road layouts, both locations are ideal candidates for MPDC
+                installations, which can play a pivotal role in reducing traffic violations and promoting safer driving behavior.
             </p>
             <Link to="/Dashboard" className="btn btn-success mb-5">Back to Dashboard</Link>
         </div>
