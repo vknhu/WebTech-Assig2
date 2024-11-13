@@ -47,7 +47,6 @@ function Report() {
     }, [data1, data2]);
 
     function drawD3Graphs() {
-        // Clear previous graphs
         d3.select("#graph1").selectAll("*").remove();
         d3.select("#graph2").selectAll("*").remove();
 
@@ -56,16 +55,17 @@ function Report() {
         const southCounts = Object.values(data2.expiationDaysOfWeek);
 
         const svgWidth = 600;
-        const svgHeight = 300;
+        const svgHeight = 400;
+        const margin = { top: 20, right: 30, bottom: 40, left: 40 };
 
         const xScale = d3.scaleBand()
             .domain(days)
-            .range([0, svgWidth])
+            .range([margin.left, svgWidth - margin.right])
             .padding(0.1);
 
         const yScale = d3.scaleLinear()
             .domain([0, d3.max([...anzacCounts, ...southCounts])])
-            .range([svgHeight, 0]);
+            .range([svgHeight - margin.bottom, margin.top]);
 
         // Create Anzac Highway Bar Chart
         const svg1 = d3.select("#graph1")
@@ -80,8 +80,16 @@ function Report() {
             .attr("x", (d, i) => xScale(days[i]))
             .attr("y", d => yScale(d))
             .attr("width", xScale.bandwidth())
-            .attr("height", d => svgHeight - yScale(d))
+            .attr("height", d => svgHeight - margin.bottom - yScale(d))
             .attr("fill", "blue");
+
+        svg1.append("g")
+            .attr("transform", `translate(0, ${svgHeight - margin.bottom})`)
+            .call(d3.axisBottom(xScale));
+
+        svg1.append("g")
+            .attr("transform", `translate(${margin.left}, 0)`)
+            .call(d3.axisLeft(yScale));
 
         // Create South Road Bar Chart
         const svg2 = d3.select("#graph2")
@@ -96,8 +104,15 @@ function Report() {
             .attr("x", (d, i) => xScale(days[i]))
             .attr("y", d => yScale(d))
             .attr("width", xScale.bandwidth())
-            .attr("height", d => svgHeight - yScale(d))
+            .attr("height", d => svgHeight - margin.bottom - yScale(d))
             .attr("fill", "orange");
+
+        svg2.append("g")
+            .attr("transform", `translate(0, ${svgHeight - margin.bottom})`)
+            .call(d3.axisBottom(xScale));
+        svg2.append("g")
+            .attr("transform", `translate(${margin.left}, 0)`)
+            .call(d3.axisLeft(yScale));
     }
 
     function handleLogout() {
