@@ -51,7 +51,6 @@ function Report() {
                     <Link to="/Login" onClick={handleLogout} class="text-light">Log out</Link>
                 </p>
             </div>
-            <Link to="/Dashboard" class="btn btn-success">Back to Dashboard</Link>
 
             <h3>Introduction</h3>
             <p>This report provides an analysis of two recommended locations in South Australia for installing
@@ -70,7 +69,23 @@ function Report() {
                     <p>Location 2: South Road, Adelaide (locationId: 2164)</p>
                 </div>
             </div>
-            <h3>Sites Identification</h3>
+            <h3>Site Identification</h3>
+            <ul>
+                <li>Suburb: Adelaide</li>
+                <li>Camera Type: Mobile Camera</li>
+                <li>Start Date: 01/01/2024</li>
+            </ul>
+            <img src="/Filters.png" alt="Search options screenshot" className="site mb-2"/>
+            
+            <p>Matching locations:</p>
+            <img src="/Locations.png" alt="Returned locations" className="mb-2" />
+            <p>
+                Explanation: The data reveals that some locations record no expiations, while others have hundreds. 
+                For this report, locations 65 and 2164 were selected to illustrate the significant gap in expiation counts and total fees.
+                This allows us to analyze why such differences exist between two locations with the same suburb and camera type.
+            </p>
+
+
             <h3>Data visualization</h3>
             <div className="row">
                 <p>Graph 1</p>
@@ -90,7 +105,7 @@ function Report() {
                 Additionally, road design considerations, such as the presence of intersections, pedestrian crossings, and traffic flow patterns, should be taken into account.
                 Both locations are heavily trafficked, making them prime candidates for MPDC installations to enhance road safety and reduce violations.
             </p>
-            
+            <Link to="/Dashboard" class="btn btn-success">Back to Dashboard</Link>
         </div>
 
     )
