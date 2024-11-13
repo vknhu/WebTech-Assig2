@@ -91,6 +91,17 @@ function Report() {
             .attr("transform", `translate(${margin.left}, 0)`)
             .call(d3.axisLeft(yScale));
 
+        svg1.selectAll(".anzac-label")
+            .data(anzacCounts)
+            .enter()
+            .append("text")
+            .attr("class", "anzac-label")
+            .attr("x", (d, i) => xScale(days[i]) + xScale.bandwidth() / 2)
+            .attr("y", d => yScale(d) - 5)
+            .attr("text-anchor", "middle")
+            .text(d => d)
+            .attr("fill", "black");
+
         // Create South Road Bar Chart
         const svg2 = d3.select("#graph2")
             .attr("width", svgWidth)
@@ -110,9 +121,21 @@ function Report() {
         svg2.append("g")
             .attr("transform", `translate(0, ${svgHeight - margin.bottom})`)
             .call(d3.axisBottom(xScale));
+
         svg2.append("g")
             .attr("transform", `translate(${margin.left}, 0)`)
             .call(d3.axisLeft(yScale));
+
+        svg2.selectAll(".south-label")
+            .data(southCounts)
+            .enter()
+            .append("text")
+            .attr("class", "south-label")
+            .attr("x", (d, i) => xScale(days[i]) + xScale.bandwidth() / 2)
+            .attr("y", d => yScale(d) - 5)
+            .attr("text-anchor", "middle")
+            .text(d => d)
+            .attr("fill", "black");
     }
 
     function handleLogout() {
