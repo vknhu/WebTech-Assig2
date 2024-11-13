@@ -1,6 +1,7 @@
 ﻿import "./Report.css";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import * as d3 from "d3";
 
 function Report() {
     const navigate = useNavigate();
@@ -38,6 +39,15 @@ function Report() {
     useEffect(() => {
         console.log("Anzac: ", data1, "\nSouth: ", data2)
     })
+
+    useEffect(() => {
+        drawD3Graphs();
+    }, [data1, data2]);
+
+    function drawD3Graphs() {
+        d3.select("#graph1").selectAll("*").remove();
+        d3.select("#graph2").selectAll("*").remove();
+    };
 
     function handleLogout() {
         localStorage.setItem("isAuthenticated", "false");
@@ -85,11 +95,10 @@ function Report() {
                 This allows us to analyze why such differences exist between two locations with the same suburb and camera type.
             </p>
 
-
             <h3>Data visualization</h3>
             <div className="row">
-                <p>Graph 1</p>
-                <p>Graph 2</p>
+                <svg id="graph1"></svg>
+                <svg id="graph2"></svg>
             </div>
             <h3>Analysis and Justification</h3>
             <p>
