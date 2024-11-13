@@ -63,7 +63,37 @@ function Report() {
             .domain([0, d3.max([...anzacCounts, ...southCounts])])
             .range([300, 0]);
 
-        
+        // Create Anzac Highway Bar Chart
+        const svg1 = d3.select("#graph1")
+            .attr("width", 500)
+            .attr("height", 300);
+
+        svg1.selectAll(".anzac-bar")
+            .data(anzacCounts)
+            .enter()
+            .append("rect")
+            .attr("class", "anzac-bar")
+            .attr("x", (d, i) => xScale(days[i]))
+            .attr("y", d => yScale(d))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => 300 - yScale(d))
+            .attr("fill", "blue");
+
+        // Create South Road Bar Chart
+        const svg2 = d3.select("#graph2")
+            .attr("width", 500)
+            .attr("height", 300);
+
+        svg2.selectAll(".south-bar")
+            .data(southCounts)
+            .enter()
+            .append("rect")
+            .attr("class", "south-bar")
+            .attr("x", (d, i) => xScale(days[i]))
+            .attr("y", d => yScale(d))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => 300 - yScale(d))
+            .attr("fill", "orange");
     }
 
     function handleLogout() {
