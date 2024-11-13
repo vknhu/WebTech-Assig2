@@ -6,13 +6,12 @@ function Report() {
     const navigate = useNavigate();
     //const offenceCodes = ["A001", "A002", "A003", "A004", "C801", "C802", "C803", "C804"]
     //const offences = offenceCodes.map(o => `${encodeURIComponent(o)}`).join("&");
-    const date = new Date('2024-01-01T00:00:00Z');
-    const startDate = Math.floor(date.getTime() / 1000);
-
+    const startDate = Math.floor(new Date('2024-01-01T00:00:00Z').getTime() / 1000);
     console.log(startDate);
 
     const [data1, setData1] = useState();
     const [data2, setData2] = useState();
+    const locations = [{ id: 65, setData: setData1 }, { id: 2164, setData: setData2 }]
 
     useEffect(() => {
         // Check if the user is authenticated
@@ -24,16 +23,15 @@ function Report() {
     }, [navigate]);
 
     useEffect(() => {
-        fetch(`http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=65&cameraTypeCode=M&startTime=${startDate}`)
-            .then(response => response.json())
-            .then(data => setData1(data))
-            .catch(err => console.log(err))
-    }, [startDate]);
-    useEffect(() => {
-        fetch(`http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=2164&cameraTypeCode=M&startTime=${startDate}`)
-            .then(response => response.json())
-            .then(data => setData2(data))
-            .catch(err => console.log(err))
+        locations.forEach(({ id, setData }) => {
+            fetch(`http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=${id}&cameraTypeCode=M&startTime=${startDate}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(`Data for location ID ${id}:`, data);
+                    setData(data);
+                })
+                .catch(err => console.log(err));
+        });
     }, [startDate]);
 
     // Test fetched data
