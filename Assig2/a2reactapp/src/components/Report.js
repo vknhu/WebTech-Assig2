@@ -4,6 +4,9 @@ import React, { useState, useEffect } from "react";
 
 function Report() {
     const navigate = useNavigate();
+    const offenceCodes = ["A001", "A002", "A003", "A004"]
+    const [data1, setData1] = useState();
+    const [data2, setData2] = useState();
 
     useEffect(() => {
         // Check if the user is authenticated
@@ -13,6 +16,19 @@ function Report() {
             navigate("/Login");
         }
     }, [navigate]);
+
+    useEffect(() => {
+        fetch("http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=65&cameraTypeCode=M")
+            .then(response => response.json())
+            .then(data => setData1(data))
+            .catch(err => consol.log(err))
+    });
+    useEffect(() => {
+        fetch("http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=&cameraTypeCode=M")
+            .then(response => response.json())
+            .then(data => setData2(data))
+            .catch(err => consol.log(err))
+    });
 
     function handleLogout() {
         localStorage.setItem("isAuthenticated", "false");
