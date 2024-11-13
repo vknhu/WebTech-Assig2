@@ -18,6 +18,20 @@
     width: 100%;
 }
 
-svg {
-    border: 1px solid black;
+.graph-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin: 20px 0;
 }
+
+    .graph-container svg {
+        width: 600px;
+        height: 300px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+    }
+
+        .graph-container svg:last-child {
+            margin-right: 0;
+        }

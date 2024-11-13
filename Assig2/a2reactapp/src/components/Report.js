@@ -47,6 +47,7 @@ function Report() {
     }, [data1, data2]);
 
     function drawD3Graphs() {
+        // Clear previous graphs
         d3.select("#graph1").selectAll("*").remove();
         d3.select("#graph2").selectAll("*").remove();
 
@@ -54,19 +55,22 @@ function Report() {
         const anzacCounts = Object.values(data1.expiationDaysOfWeek);
         const southCounts = Object.values(data2.expiationDaysOfWeek);
 
+        const svgWidth = 600;
+        const svgHeight = 300;
+
         const xScale = d3.scaleBand()
             .domain(days)
-            .range([0, 400])
+            .range([0, svgWidth])
             .padding(0.1);
 
         const yScale = d3.scaleLinear()
             .domain([0, d3.max([...anzacCounts, ...southCounts])])
-            .range([300, 0]);
+            .range([svgHeight, 0]);
 
         // Create Anzac Highway Bar Chart
         const svg1 = d3.select("#graph1")
-            .attr("width", 500)
-            .attr("height", 300);
+            .attr("width", svgWidth)
+            .attr("height", svgHeight);
 
         svg1.selectAll(".anzac-bar")
             .data(anzacCounts)
@@ -76,13 +80,13 @@ function Report() {
             .attr("x", (d, i) => xScale(days[i]))
             .attr("y", d => yScale(d))
             .attr("width", xScale.bandwidth())
-            .attr("height", d => 300 - yScale(d))
+            .attr("height", d => svgHeight - yScale(d))
             .attr("fill", "blue");
 
         // Create South Road Bar Chart
         const svg2 = d3.select("#graph2")
-            .attr("width", 500)
-            .attr("height", 300);
+            .attr("width", svgWidth)
+            .attr("height", svgHeight);
 
         svg2.selectAll(".south-bar")
             .data(southCounts)
@@ -92,7 +96,7 @@ function Report() {
             .attr("x", (d, i) => xScale(days[i]))
             .attr("y", d => yScale(d))
             .attr("width", xScale.bandwidth())
-            .attr("height", d => 300 - yScale(d))
+            .attr("height", d => svgHeight - yScale(d))
             .attr("fill", "orange");
     }
 
@@ -143,7 +147,7 @@ function Report() {
             </p>
 
             <h3>Data visualization</h3>
-            <div className="row">
+            <div className="graph-container">
                 <svg id="graph1"></svg>
                 <svg id="graph2"></svg>
             </div>
