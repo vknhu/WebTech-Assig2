@@ -4,7 +4,13 @@ import React, { useState, useEffect } from "react";
 
 function Report() {
     const navigate = useNavigate();
-    const offenceCodes = ["A001", "A002", "A003", "A004"]
+    const offenceCodes = ["A001", "A002", "A003", "A004", "C801", "C802", "C803", "C804"]
+    const offences = offenceCodes.map(o => `${encodeURIComponent(o)}`).join("&");
+    const date = new Date('2024-01-01T00:00:00Z');
+    const startDate = Math.floor(date.getTime() / 1000);
+
+    console.log(startDate);
+
     const [data1, setData1] = useState();
     const [data2, setData2] = useState();
 
@@ -18,17 +24,23 @@ function Report() {
     }, [navigate]);
 
     useEffect(() => {
-        fetch("http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=65&cameraTypeCode=M")
+        fetch(`http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=65&cameraTypeCode=M&startTime=${startDate}&offenceCodes=${offences}`)
             .then(response => response.json())
-            .then(data => setData1(data))
-            .catch(err => consol.log(err))
-    });
+            .then(data => {
+                console.log("Anzac stat: " + data);
+                setData1(data)
+            })
+            .catch(err => console.log(err))
+    }, [startDate, offences]);
     useEffect(() => {
-        fetch("http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=&cameraTypeCode=M")
+        fetch(`http://localhost:5147/api/Get_ExpiationStatsForLocationId?locationId=2164&cameraTypeCode=M&startTime=${startDate}&offenceCodes=${offences}`)
             .then(response => response.json())
-            .then(data => setData2(data))
-            .catch(err => consol.log(err))
-    });
+            .then(data => {
+                console.log("Location 2 data: " + data);
+                setData2(data)
+            })
+            .catch(err => console.log(err))
+    }, [startDate, offences]);
 
     function handleLogout() {
         localStorage.setItem("isAuthenticated", "false");
@@ -49,7 +61,7 @@ function Report() {
                 to determine these locations, along with relevant data visualizations to support the recommendations.</p>
             <h3>Selected Location</h3>
             <ul>
-                <ol>LocationId:</ol>
+                <ol>Location1: Anzac Highway, Adelaide (locationId: 65)</ol>
                 <ol>LocationId:</ol>
             </ul>
             <p>filters and search options used in the dashboard to identify these sites</p>
