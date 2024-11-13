@@ -56,7 +56,7 @@ function Report() {
 
         const svgWidth = 600;
         const svgHeight = 400;
-        const margin = { top: 20, right: 30, bottom: 40, left: 40 };
+        const margin = { top: 35, right: 30, bottom: 15, left: 40 };
 
         const xScale = d3.scaleBand()
             .domain(days)
@@ -83,9 +83,15 @@ function Report() {
             .attr("height", d => svgHeight - margin.bottom - yScale(d))
             .attr("fill", "blue");
 
-        svg1.append("g")
+        const xAxis1 = svg1.append("g")
             .attr("transform", `translate(0, ${svgHeight - margin.bottom})`)
             .call(d3.axisBottom(xScale));
+
+        xAxis1.selectAll("text")
+            .attr("transform", "rotate(-45)")
+            .attr("text-anchor", "end")
+            .attr("dx", "-0.5em")
+            .attr("dy", "0.5em");
 
         svg1.append("g")
             .attr("transform", `translate(${margin.left}, 0)`)
@@ -118,9 +124,15 @@ function Report() {
             .attr("height", d => svgHeight - margin.bottom - yScale(d))
             .attr("fill", "orange");
 
-        svg2.append("g")
+       const xAxis2 =  svg2.append("g")
             .attr("transform", `translate(0, ${svgHeight - margin.bottom})`)
             .call(d3.axisBottom(xScale));
+
+        xAxis2.selectAll("text")
+            .attr("transform", " rotate(-45)")
+            .attr("text-anchor", "end")
+            .attr("dx", "-0.5em")
+            .attr("dy", "0.5em");
 
         svg2.append("g")
             .attr("transform", `translate(${margin.left}, 0)`)
