@@ -41,13 +41,30 @@ function Report() {
     })
 
     useEffect(() => {
-        drawD3Graphs();
+        if (data1 && data2) {
+            drawD3Graphs();
+        }
     }, [data1, data2]);
 
     function drawD3Graphs() {
         d3.select("#graph1").selectAll("*").remove();
         d3.select("#graph2").selectAll("*").remove();
-    };
+
+        const days = Object.keys(data1.expiationDaysOfWeek);
+        const anzacCounts = Object.values(data1.expiationDaysOfWeek);
+        const southCounts = Object.values(data2.expiationDaysOfWeek);
+
+        const xScale = d3.scaleBand()
+            .domain(days)
+            .range([0, 400])
+            .padding(0.1);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max([...anzacCounts, ...southCounts])])
+            .range([300, 0]);
+
+        
+    }
 
     function handleLogout() {
         localStorage.setItem("isAuthenticated", "false");

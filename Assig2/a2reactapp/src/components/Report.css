@@ -17,3 +17,7 @@
 .site {
     width: 100%;
 }
+
+svg {
+    border: 1px solid black;
+}
