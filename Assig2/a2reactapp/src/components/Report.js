@@ -51,23 +51,26 @@ function Report() {
                     <Link to="/Login" onClick={handleLogout} class="text-light">Log out</Link>
                 </p>
             </div>
+            <Link to="/Dashboard" class="btn btn-success">Back to Dashboard</Link>
+
             <h3>Introduction</h3>
             <p>This report provides an analysis of two recommended locations in South Australia for installing
                 Mobile Phone Detection Cameras (MPDCs) based on expiation data from the SAPOL Expiations database.
                 The chosen locations are Anzac Highway and South Road, located in the same suburb but on different roads.
                 The analysis below includes key statistics such as the total number of offences, total demerits,
                 total fees collected, average demerits and fees per day, and offence distribution throughout the week.</p>
-            <h3>Selected Location</h3>
-            <ul>
-                <ol>Location1: Anzac Highway, Adelaide (locationId: 65)</ol>
-                <ol>LocationId:</ol>
-            </ul>
-            <p>filters and search options used in the dashboard to identify these sites</p>
-            <h3>Visual Evidence and Data Representation</h3>
-            <div className="row">
-                <img src="" placeholder="Google Maps Screenshot of location 1" />
-                <img src="" placeholder="Google Maps Screenshot of location 2" />
+                    
+            <div className="location-container">
+                <div className="location-item">
+                    <img src="/Anzac HWY Adelaide.png" alt="Google Maps Screenshot of Anzac Highway, Adelaide" />
+                    <p>Location 1: Anzac Highway, Adelaide (locationId: 65)</p>
+                </div>
+                <div className="location-item">
+                    <img src="/South Road Adelaide.png" alt="Google Maps Screenshot of South Road, Adelaide" />
+                    <p>Location 2: South Road, Adelaide (locationId: 2164)</p>
+                </div>
             </div>
+            <h3>Sites Identification</h3>
             <h3>Data visualization</h3>
             <div className="row">
                 <p>Graph 1</p>
@@ -87,7 +90,7 @@ function Report() {
                 Additionally, road design considerations, such as the presence of intersections, pedestrian crossings, and traffic flow patterns, should be taken into account.
                 Both locations are heavily trafficked, making them prime candidates for MPDC installations to enhance road safety and reduce violations.
             </p>
-            <Link to="/Dashboard" class="btn btn-success">Back to Dashboard</Link>
+            
         </div>
 
     )
