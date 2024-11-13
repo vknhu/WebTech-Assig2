@@ -49,3 +49,13 @@
         .graph-container svg:last-child {
             margin-right: 0;
         }
+
+.table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+    .table th, .table td {
+        border: 1px solid black;
+        padding: 8px;
+    }

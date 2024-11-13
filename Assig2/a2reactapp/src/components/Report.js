@@ -211,6 +211,45 @@ function Report() {
             </p>
 
             <h3>3. Analysis and Justification</h3>
+            <p>Overall:</p>
+            <div className="row">
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Anzac Highway</th>
+                            <th>South Road</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Offences</td>
+                            <td>{data1 ? data1.totalOffencesCount : 'N/A'}</td>
+                            <td>{data2 ? data2.totalOffencesCount : 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Demerits</td>
+                            <td>{data1 ? data1.totalDemerits : 'N/A'}</td>
+                            <td>{data2 ? data2.totalDemerits : 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Fees</td>
+                            <td>{data1 ? `$${data1.totalFeeSum}` : 'N/A'}</td>
+                            <td>{data2 ? `$${data2.totalFeeSum}` : 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td>Average Demerits per Day</td>
+                            <td>{data1 ? data1.avgDemeritsPerDay.toFixed(2) : 'N/A'}</td>
+                            <td>{data2 ? data2.avgDemeritsPerDay.toFixed(2) : 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td>Average Fee per Day</td>
+                            <td>{data1 ? `$${data1.avgFeePerDay.toFixed(2)}` : 'N/A'}</td>
+                            <td>{data2 ? `$${data2.avgFeePerDay.toFixed(2)}` : 'N/A'}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div className="graph-container">
                 <svg id="graph1"></svg>
                 <svg id="graph2"></svg>
@@ -238,6 +277,14 @@ function Report() {
                 These factors underscore the importance of strategic camera positioning to monitor key risk areas and improve
                 safety outcomes. Given the heavy traffic and complex road layouts, both locations are ideal candidates for MPDC
                 installations, which can play a pivotal role in reducing traffic violations and promoting safer driving behavior.
+            </p>
+
+            <h3>4. Summary</h3>
+            <p>
+                In conclusion, the selection of SAPOL data and sites for analysis has been a critical step in enhancing our
+                understanding of crime patterns and resource allocation within the community. Through careful consideration of
+                various factors, we have established a robust framework for data selection that prioritizes relevance, accuracy,
+                and accessibility.
             </p>
             <Link to="/Dashboard" className="btn btn-success mb-5">Back to Dashboard</Link>
         </div>
