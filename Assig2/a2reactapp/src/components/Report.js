@@ -80,8 +80,13 @@ function Report() {
             .attr("x", (d, i) => xScale(days[i]))
             .attr("y", d => yScale(d))
             .attr("width", xScale.bandwidth())
+            .attr("height", 0)
+            .style("fill", "transparent")
+            .transition().duration(500)
+            .delay((d, i) => i * 100)
+            .attr("y", d => yScale(d))
             .attr("height", d => svgHeight - margin.bottom - yScale(d))
-            .attr("fill", "blue");
+            .style("fill", (d, i) => `rgb(0, 0, ${i * 30 + 100})`);
 
         const xAxis1 = svg1.append("g")
             .attr("transform", `translate(0, ${svgHeight - margin.bottom})`)
@@ -121,8 +126,13 @@ function Report() {
             .attr("x", (d, i) => xScale(days[i]))
             .attr("y", d => yScale(d))
             .attr("width", xScale.bandwidth())
+            .attr("height", 0)
+            .style("fill", "transparent")
+            .transition().duration(500)
+            .delay((d, i) => i * 100)
+            .attr("y", d => yScale(d))
             .attr("height", d => svgHeight - margin.bottom - yScale(d))
-            .attr("fill", "orange");
+            .style("fill", (d, i) => `rgb(${i * 20 + 100}, 50, 0)`);
 
        const xAxis2 =  svg2.append("g")
             .attr("transform", `translate(0, ${svgHeight - margin.bottom})`)
@@ -215,7 +225,7 @@ function Report() {
                 Additionally, road design considerations, such as the presence of intersections, pedestrian crossings, and traffic flow patterns, should be taken into account.
                 Both locations are heavily trafficked, making them prime candidates for MPDC installations to enhance road safety and reduce violations.
             </p>
-            <Link to="/Dashboard" class="btn btn-success">Back to Dashboard</Link>
+            <Link to="/Dashboard" className="btn btn-success mb-5">Back to Dashboard</Link>
         </div>
 
     )
